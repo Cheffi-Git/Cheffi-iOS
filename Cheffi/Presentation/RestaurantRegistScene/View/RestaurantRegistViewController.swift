@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
+import ComposableArchitecture
 
 class RestaurantRegistViewController: UIViewController {
+
     static func instance<T: RestaurantRegistViewController>() -> T {
         let vc: T = .instance(storyboardName: .restaurantRegist)
         return vc
@@ -18,5 +21,13 @@ class RestaurantRegistViewController: UIViewController {
         debugPrint("------------------------------------------")
         debugPrint("RestaurantRegistViewController viewDidLoad")
         debugPrint("------------------------------------------")
+
+        addHostingController(
+            view: RestaurantRegistView(
+                store: Store(initialState: RestaurantRegistFeature.State()) {
+                    RestaurantRegistFeature()._printChanges()
+                }
+            )
+        )
     }
 }
