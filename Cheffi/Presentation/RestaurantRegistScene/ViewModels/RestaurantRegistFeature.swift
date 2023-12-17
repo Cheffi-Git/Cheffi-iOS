@@ -5,26 +5,35 @@
 //  Created by Eli_01 on 12/17/23.
 //
 
+import Foundation
+import Combine
 import ComposableArchitecture
 
 @Reducer
-struct RestaurantRegistFeature {
+struct RestaurantRegistFeature: Reducer {
+    let useCase: RestaurantUseCase
+
+    init(useCase: RestaurantUseCase) {
+        self.useCase = useCase
+    }
+
     struct State: Equatable {
         var searchQuery = ""
-        var resultList: [String] = []
+        var restaurantList: [RestaurantInfoDTO] = []
     }
 
     enum Action {
         case input(String)
+        case getRestaurants([RestaurantInfoDTO])
     }
 
-    var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            switch action {
-            case .input(let text):
-                state.resultList = [text]
-                return .none
-            }
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
+        switch action {
+        case .input(let text):
+            return useCase.getRestaurants(name: text, province: "", city: "")
+        case .getRestaurants(let list):
+            state.restaurantList = list
+            return .none
         }
     }
 }
