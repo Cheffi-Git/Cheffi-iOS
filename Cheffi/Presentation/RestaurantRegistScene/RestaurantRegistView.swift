@@ -18,7 +18,12 @@ struct RestaurantRegistView: View {
                     "검색어 입력",
                     text: viewStore.binding(get: \.searchQuery, send: { .input($0) })
                 )
-                Text("Result: \(viewStore.resultList[safe: 0] ?? "")")
+                Text("ALL: \(viewStore.restaurantList.map { $0.id }.reduce("") { "\($0)\($1)" })")
+                List {
+                    ForEach(viewStore.restaurantList) { restaurant in
+                        Text("Result: \(restaurant.id)")
+                    }
+                }
             }
         }
     }
@@ -27,7 +32,7 @@ struct RestaurantRegistView: View {
 #Preview {
     RestaurantRegistView(
         store: Store(initialState: RestaurantRegistFeature.State()) {
-            RestaurantRegistFeature()
+            RestaurantRegistFeature(useCase: RestaurantUseCase)._printChanges()
         }
     )
 }

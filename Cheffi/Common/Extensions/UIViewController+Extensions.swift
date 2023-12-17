@@ -68,5 +68,9 @@ extension UIViewController {
         self.addChild(hostingVC)
 
         self.view.addSubview(swiftUIView)
+
+        swiftUIView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
