@@ -18,9 +18,8 @@ struct RestaurantRegistView: View {
                     "검색어 입력",
                     text: viewStore.binding(get: \.searchQuery, send: { .input($0) })
                 )
-                Text("ALL: \(viewStore.restaurantList.map { $0.id }.reduce("") { "\($0)\($1)" })")
                 List {
-                    ForEach(viewStore.restaurantList) { restaurant in
+                    ForEach(viewStore.restaurantList, id: \.id) { restaurant in
                         Text("Result: \(restaurant.id)")
                     }
                 }

@@ -9,7 +9,6 @@ import Foundation
 import Combine
 import ComposableArchitecture
 
-@Reducer
 struct RestaurantRegistFeature: Reducer {
     let useCase: RestaurantUseCase
 
@@ -18,21 +17,30 @@ struct RestaurantRegistFeature: Reducer {
     }
 
     struct State: Equatable {
-        var searchQuery = ""
+        var searchQuery: String = ""
         var restaurantList: [RestaurantInfoDTO] = []
+        var error: String?
     }
 
     enum Action {
         case input(String)
         case getRestaurants([RestaurantInfoDTO])
+        case occerError(DataTransferError)
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .input(let text):
-            return useCase.getRestaurants(name: text, province: "", city: "")
+            return .publisher {
+                useCase.getRestaurants(name: text, province: "", city: "")
+                    .map(Action.getRestaurants)
+                    .catch { Just(Action.occerError($0)) }
+            }
         case .getRestaurants(let list):
             state.restaurantList = list
+            return .none
+        case .occerError(let error):
+            state.error = error.localizedDescription
             return .none
         }
     }
