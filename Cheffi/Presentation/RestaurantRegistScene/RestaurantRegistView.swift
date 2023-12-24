@@ -20,7 +20,7 @@ struct RestaurantRegistView: View {
                 )
                 List {
                     ForEach(viewStore.restaurantList, id: \.id) { restaurant in
-                        Text("Result: \(restaurant.id)")
+                        Text("Result: \(restaurant.name)")
                     }
                 }
             }
@@ -31,7 +31,10 @@ struct RestaurantRegistView: View {
 #Preview {
     RestaurantRegistView(
         store: Store(initialState: RestaurantRegistFeature.State()) {
-            RestaurantRegistFeature(useCase: RestaurantUseCase)._printChanges()
+            RestaurantRegistFeature(
+                useCase: PreviewRestaurantRegistUseCase()
+            )
+                ._printChanges()
         }
     )
 }
