@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Dependencies
 
 protocol RestaurantUseCase {
     func getRestaurants(name: String, province: String, city: String) -> AnyPublisher<[RestaurantInfoDTO], DataTransferError>
