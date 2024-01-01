@@ -17,24 +17,29 @@ struct RestaurantRegistFeature: Reducer {
     }
 
     struct State: Equatable {
-        var searchQuery: String = ""
         var restaurantList: [RestaurantInfoDTO] = []
         var error: String?
+        
+        var searchBarState = SearchBarFeature.State()
     }
 
     enum Action {
-        case input(String)
         case getRestaurants([RestaurantInfoDTO])
         case occerError(DataTransferError)
+        
+        case searchBarAction(SearchBarFeature.Action)
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .input(let text):
-            return .publisher {
-                useCase.getRestaurants(name: text, province: "", city: "")
-                    .map(Action.getRestaurants)
-                    .catch { Just(Action.occerError($0)) }
+        case .searchBarAction(let action):
+            switch action {
+            case .input(let text):
+                return .publisher {
+                    useCase.getRestaurants(name: text, province: "", city: "")
+                        .map(Action.getRestaurants)
+                        .catch { Just(Action.occerError($0)) }
+                }
             }
         case .getRestaurants(let list):
             state.restaurantList = list

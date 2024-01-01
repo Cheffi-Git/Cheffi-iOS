@@ -13,6 +13,8 @@
 		5D89F9022B2EE836001C9DD6 /* RestaurantRegistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D89F9012B2EE836001C9DD6 /* RestaurantRegistView.swift */; };
 		5D89F9052B2EF25D001C9DD6 /* RestaurantRegistFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D89F9042B2EF25D001C9DD6 /* RestaurantRegistFeature.swift */; };
 		6B7174372B42DD82009FEF35 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7174362B42DD82009FEF35 /* NavigationBarView.swift */; };
+		6BA9B9822B42C4AE0010290C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9B9812B42C4AD0010290C /* SearchBarView.swift */; };
+		6BA9B9862B42D0C90010290C /* SearchBarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9B9852B42D0C90010290C /* SearchBarFeature.swift */; };
 		CE0D45172A61712400636989 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE0D45162A61712400636989 /* SwifterSwift */; };
 		CE0D45192A617FC500636989 /* NationalTrendSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D45182A617FC500636989 /* NationalTrendSceneDIContainer.swift */; };
 		CE0D45212A618E5700636989 /* NationalTrendFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D45202A618E5700636989 /* NationalTrendFlowCoordinator.swift */; };
@@ -307,6 +309,8 @@
 		5D89F9012B2EE836001C9DD6 /* RestaurantRegistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RestaurantRegistView.swift; path = Cheffi/Presentation/RestaurantRegistScene/RestaurantRegistView.swift; sourceTree = SOURCE_ROOT; };
 		5D89F9042B2EF25D001C9DD6 /* RestaurantRegistFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantRegistFeature.swift; sourceTree = "<group>"; };
 		6B7174362B42DD82009FEF35 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		6BA9B9812B42C4AD0010290C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		6BA9B9852B42D0C90010290C /* SearchBarFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarFeature.swift; sourceTree = "<group>"; };
 		CE0D45182A617FC500636989 /* NationalTrendSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalTrendSceneDIContainer.swift; sourceTree = "<group>"; };
 		CE0D45202A618E5700636989 /* NationalTrendFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalTrendFlowCoordinator.swift; sourceTree = "<group>"; };
 		CE0D45232A618F0C00636989 /* NationalTrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NationalTrendViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				5D89F9042B2EF25D001C9DD6 /* RestaurantRegistFeature.swift */,
+				6BA9B9852B42D0C90010290C /* SearchBarFeature.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -638,6 +643,14 @@
 				6B7174362B42DD82009FEF35 /* NavigationBarView.swift */,
 			);
 			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		6BA9B9802B42C49F0010290C /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				6BA9B9812B42C4AD0010290C /* SearchBarView.swift */,
+			);
+			path = SearchBar;
 			sourceTree = "<group>";
 		};
 		CE0D451E2A6180AD00636989 /* NationalTrendScene */ = {
@@ -756,6 +769,7 @@
 			isa = PBXGroup;
 			children = (
 				6B7174352B42DD71009FEF35 /* NavigationBar */,
+				6BA9B9802B42C49F0010290C /* SearchBar */,
 				FF14EF572AE2BB7F007609FA /* Toast */,
 				D4C1C59F2AC164F4007F8C1E /* TimeLock */,
 				D4C0FA712A9DB7BD0056B885 /* Pagenation */,
@@ -1954,6 +1968,7 @@
 				FF5059A92A7E093D00F90D27 /* UserDTO.swift in Sources */,
 				FF5059B72A7E0CF900F90D27 /* Tag.swift in Sources */,
 				FFA6BA902ADBBD540094913E /* UserUseCase.swift in Sources */,
+				6BA9B9822B42C4AE0010290C /* SearchBarView.swift in Sources */,
 				FF9793B52A74C47100A921A0 /* CheffiReviewDetailViewController.swift in Sources */,
 				FF62A44A2A7FC17F0066073F /* LoginSceneFlowCoordinator.swift in Sources */,
 				FF35FAFD2ADD523F002D9E47 /* ReviewAPIEndpoints.swift in Sources */,
@@ -1967,6 +1982,7 @@
 				D43331A92A6D32AE00E6CB4B /* UICollectionView+Extensions.swift in Sources */,
 				FFB29BC52ACBE170000E473E /* NotificationUseCase.swift in Sources */,
 				D41E99322A6BB9A80085F5D0 /* UIView+Extensions.swift in Sources */,
+				6BA9B9862B42D0C90010290C /* SearchBarFeature.swift in Sources */,
 				D4C0FA6E2A9DB37F0056B885 /* RestaurantContentItemViewModel.swift in Sources */,
 				FFA6BA872ADBBB110094913E /* FollowSelectionViewModel.swift in Sources */,
 				FFDBC67A2A83AD760009189C /* NicknameVIewModel.swift in Sources */,

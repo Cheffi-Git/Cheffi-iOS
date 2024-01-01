@@ -14,11 +14,12 @@ struct RestaurantRegistView: View {
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
-                TextField(
-                    "검색어 입력",
-                    text: viewStore.binding(get: \.searchQuery, send: { .input($0) })
-                )
                 NavigationBarView(title: "내 맛집 등록")
+                
+                SearchBarView(store: self.store.scope(
+                    state: \.searchBarState, 
+                    action: RestaurantRegistFeature.Action.searchBarAction
+                ))
                 
                 List {
                     ForEach(viewStore.restaurantList, id: \.id) { restaurant in
