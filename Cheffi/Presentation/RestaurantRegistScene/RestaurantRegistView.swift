@@ -18,6 +18,8 @@ struct RestaurantRegistView: View {
                     "검색어 입력",
                     text: viewStore.binding(get: \.searchQuery, send: { .input($0) })
                 )
+                NavigationBarView(title: "내 맛집 등록")
+                
                 List {
                     ForEach(viewStore.restaurantList, id: \.id) { restaurant in
                         Text("Result: \(restaurant.name)")
