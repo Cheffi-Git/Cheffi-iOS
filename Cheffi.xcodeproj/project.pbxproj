@@ -2233,6 +2233,7 @@
 			baseConfigurationReference = 1B24CC8C1560BF374B8A3ED8 /* Pods-Cheffi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cheffi/Cheffi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2271,6 +2272,7 @@
 			baseConfigurationReference = 5D148B9BF9EC9E451CCFEBDE /* Pods-Cheffi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cheffi/Cheffi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
