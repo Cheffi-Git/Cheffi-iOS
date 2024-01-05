@@ -21,11 +21,12 @@ struct RestaurantRegistView: View {
                     action: RestaurantRegistFeature.Action.searchBarAction
                 ))
                 
-                List {
-                    ForEach(viewStore.restaurantList, id: \.id) { restaurant in
-                        Text("Result: \(restaurant.name)")
-                    }
-                }
+                NearRestaurantListView(store: self.store.scope(
+                    state: \.nearRestaurantListState,
+                    action: RestaurantRegistFeature.Action.nearRestaurantListAction
+                ))
+                
+                Spacer()
             }
         }
     }

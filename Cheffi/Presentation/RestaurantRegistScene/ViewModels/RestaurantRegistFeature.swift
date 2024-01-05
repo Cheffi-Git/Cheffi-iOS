@@ -17,10 +17,10 @@ struct RestaurantRegistFeature: Reducer {
     }
 
     struct State: Equatable {
-        var restaurantList: [RestaurantInfoDTO] = []
         var error: String?
         
         var searchBarState = SearchBarFeature.State()
+        var nearRestaurantListState = NearRestaurantListFeature.State()
     }
 
     enum Action {
@@ -28,6 +28,7 @@ struct RestaurantRegistFeature: Reducer {
         case occerError(DataTransferError)
         
         case searchBarAction(SearchBarFeature.Action)
+        case nearRestaurantListAction(NearRestaurantListFeature.Action)
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -42,7 +43,7 @@ struct RestaurantRegistFeature: Reducer {
                 }
             }
         case .getRestaurants(let list):
-            state.restaurantList = list
+            state.nearRestaurantListState.restaurantList = list
             return .none
         case .occerError(let error):
             state.error = error.localizedDescription

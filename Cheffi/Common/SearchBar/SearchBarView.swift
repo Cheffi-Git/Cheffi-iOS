@@ -10,12 +10,7 @@ import ComposableArchitecture
  
 struct SearchBarView: View {
     private enum Metrics {
-        static let barPaddingEdgeInsets = EdgeInsets(
-            top: 20.0,
-            leading: 16.0,
-            bottom: 16.0,
-            trailing: 16.0
-        )
+        static let barPaddingEdgeInsets = EdgeInsets(top: 20.0, leading: 16.0, bottom: 16.0, trailing: 16.0)
         static let barHeight = 40.0
         static let barCornerRadius = 6.0
     }
@@ -45,6 +40,7 @@ struct SearchBarView: View {
                     }
                 }
                 .padding()
+                .frame(height: Metrics.barHeight)
                 .foregroundColor(.cheffiBlack)
                 .background(.cheffiWhite05)
                 .cornerRadius(Metrics.barCornerRadius)
