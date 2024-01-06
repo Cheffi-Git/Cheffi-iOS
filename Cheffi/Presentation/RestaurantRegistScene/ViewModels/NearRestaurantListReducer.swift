@@ -1,5 +1,5 @@
 //
-//  NearRestaurantListFeature.swift
+//  NearRestaurantListReducer.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/6/24.
@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct NearRestaurantListFeature: Reducer {
+struct NearRestaurantListReducer: Reducer {
     struct State: Equatable {
         var restaurantList: [RestaurantInfoDTO] = []
     }

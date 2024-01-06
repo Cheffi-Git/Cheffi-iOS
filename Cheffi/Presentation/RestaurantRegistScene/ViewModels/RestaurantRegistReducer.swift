@@ -1,5 +1,5 @@
 //
-//  RestaurantRegistFeature.swift
+//  RestaurantRegistReducer.swift
 //  Cheffi
 //
 //  Created by Eli_01 on 12/17/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import ComposableArchitecture
 
-struct RestaurantRegistFeature: Reducer {
+struct RestaurantRegistReducer: Reducer {
     let useCase: RestaurantUseCase
 
     init(useCase: RestaurantUseCase) {
@@ -19,16 +19,16 @@ struct RestaurantRegistFeature: Reducer {
     struct State: Equatable {
         var error: String?
         
-        var searchBarState = SearchBarFeature.State()
-        var nearRestaurantListState = NearRestaurantListFeature.State()
+        var searchBarState = SearchBarReducer.State()
+        var nearRestaurantListState = NearRestaurantListReducer.State()
     }
 
     enum Action {
         case getRestaurants([RestaurantInfoDTO])
         case occerError(DataTransferError)
         
-        case searchBarAction(SearchBarFeature.Action)
-        case nearRestaurantListAction(NearRestaurantListFeature.Action)
+        case searchBarAction(SearchBarReducer.Action)
+        case nearRestaurantListAction(NearRestaurantListReducer.Action)
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {

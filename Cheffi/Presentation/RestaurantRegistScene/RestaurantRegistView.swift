@@ -7,38 +7,38 @@
 
 import SwiftUI
 import ComposableArchitecture
+import ViewStore
 
+@ViewStore(RestaurantRegistReducer.self)
 struct RestaurantRegistView: View {
-    let store: StoreOf<RestaurantRegistFeature>
-
     var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack {
-                NavigationBarView(title: "내 맛집 등록")
-                
-                SearchBarView(store: self.store.scope(
-                    state: \.searchBarState, 
-                    action: RestaurantRegistFeature.Action.searchBarAction
-                ))
-                
-                NearRestaurantListView(store: self.store.scope(
-                    state: \.nearRestaurantListState,
-                    action: RestaurantRegistFeature.Action.nearRestaurantListAction
-                ))
-                
-                Spacer()
-            }
+        VStack {
+            NavigationBarView(title: "내 맛집 등록")
+            
+            SearchBarView(store.scope(
+                state: \.searchBarState,
+                action: RestaurantRegistReducer.Action.searchBarAction
+            ))
+            
+            NearRestaurantListView(store.scope(
+                state: \.nearRestaurantListState,
+                action: RestaurantRegistReducer.Action.nearRestaurantListAction
+            ))
+            
+            Spacer()
         }
     }
 }
 
-#Preview {
-    RestaurantRegistView(
-        store: Store(initialState: RestaurantRegistFeature.State()) {
-            RestaurantRegistFeature(
-                useCase: PreviewRestaurantRegistUseCase()
-            )
-                ._printChanges()
-        }
-    )
+struct RestaurantRegistView_Previews: PreviewProvider {
+    static var previews: some View {
+        RestaurantRegistView(
+            Store(initialState: RestaurantRegistReducer.State()) {
+                RestaurantRegistReducer(
+                    useCase: PreviewRestaurantRegistUseCase()
+                )
+                    ._printChanges()
+            }
+        )
+    }
 }
