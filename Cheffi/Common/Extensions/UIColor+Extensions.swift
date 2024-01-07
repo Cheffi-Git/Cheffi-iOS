@@ -28,4 +28,5 @@ extension UIColor {
 	// CheffiGray10 #D9D9D9
     // CheffiPink1 #FFBFC9
 	// CheffiPink2 #FFF2F4
+    // Bg #FFF2F4
 }

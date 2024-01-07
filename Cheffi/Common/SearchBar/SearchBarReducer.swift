@@ -8,16 +8,16 @@
 import Foundation
 import ComposableArchitecture
 
-public struct SearchBarReducer: Reducer {
-    public struct State: Equatable {
+struct SearchBarReducer: Reducer {
+    struct State: Equatable {
         var searchQuery: String = "검색어 입력"
     }
 
-    public enum Action {
+    enum Action {
         case input(String)
     }
 
-    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .input:
             return .none

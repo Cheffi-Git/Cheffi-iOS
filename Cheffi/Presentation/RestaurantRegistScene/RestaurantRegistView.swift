@@ -20,12 +20,21 @@ struct RestaurantRegistView: View {
                 action: RestaurantRegistReducer.Action.searchBarAction
             ))
             
-            NearRestaurantListView(store.scope(
-                state: \.nearRestaurantListState,
-                action: RestaurantRegistReducer.Action.nearRestaurantListAction
-            ))
-            
-            Spacer()
+            if viewStore.isEmptyNearRestaurant {
+                NearRestaurantEmptyView(store.scope(
+                    state: \.nearRestaurantEmptyState,
+                    action: RestaurantRegistReducer.Action.nearRestaurantEmptyAction
+                ))
+                
+                Spacer()
+            } else {
+                NearRestaurantListView(store.scope(
+                    state: \.nearRestaurantListState,
+                    action: RestaurantRegistReducer.Action.nearRestaurantListAction
+                ))
+                
+                Spacer()
+            }
         }
     }
 }
