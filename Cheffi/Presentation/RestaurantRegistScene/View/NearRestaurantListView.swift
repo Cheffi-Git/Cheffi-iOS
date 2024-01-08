@@ -11,18 +11,20 @@ import ViewStore
 
 @ViewStore(NearRestaurantListReducer.self)
 struct NearRestaurantListView: View {
-    private enum Policy {
-        static let verticalCount = 4
+    private enum Metrics {
+        static let gridCount = 4
+        static let itemWidth = 285.0
+        static let itemHeight = 72.0
     }
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(
-                rows: [GridItem(.fixed(72)), GridItem(.fixed(72)), GridItem(.fixed(72)), GridItem(.fixed(72))],
+                rows: Array(repeating: GridItem(.fixed(Metrics.itemHeight)), count: Metrics.gridCount),
                 spacing: 0
             ) {
-                ForEach(viewStore.restaurantList, id: \.self) { restaurant in
-                    NearRestaurantItemView(restaurant: restaurant)
+                ForEach(viewStore.nearRestaurantList, id: \.self) { restaurant in
+                    RestaurantItemView(restaurant: restaurant, itemWidth: Metrics.itemWidth)
                 }
             }
         }

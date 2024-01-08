@@ -1,5 +1,5 @@
 //
-//  NearRestaurantEmptyReducer.swift
+//  EmptyDescriptionViewReducer.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/7/24.
@@ -8,9 +8,12 @@
 import Foundation
 import ComposableArchitecture
 
-struct NearRestaurantEmptyReducer: Reducer {
+struct EmptyDescriptionViewReducer: Reducer {
     struct State: Equatable {
-        var emptyViewButtonState = EmptyViewButtonReducer.State()
+        var imageName: String
+        var descriptionText: String
+        
+        var emptyViewButtonState: EmptyViewButtonReducer.State
     }
     enum Action {
         case emptyViewButtonAction(EmptyViewButtonReducer.Action)

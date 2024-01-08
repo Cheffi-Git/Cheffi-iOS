@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct EmptyViewButtonReducer: Reducer {
     struct State: Equatable {
-        var title: String = "맛집 직접 등록하기"
+        var title: String
     }
     
     enum Action {

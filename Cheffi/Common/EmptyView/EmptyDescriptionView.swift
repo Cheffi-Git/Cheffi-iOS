@@ -1,5 +1,5 @@
 //
-//  NearRestaurantEmptyView.swift
+//  EmptyDescriptionView.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/7/24.
@@ -9,8 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 import ViewStore
 
-@ViewStore(NearRestaurantEmptyReducer.self)
-struct NearRestaurantEmptyView: View {
+@ViewStore(EmptyDescriptionViewReducer.self)
+struct EmptyDescriptionView: View {
     private enum Metrics {
         static let imageTopHeight = 83.0
         static let descriptionTopHeight = 18.0
@@ -19,11 +19,11 @@ struct NearRestaurantEmptyView: View {
         VStack {
             Spacer().frame(height: Metrics.imageTopHeight)
             
-            Image("empty_near_restaurant")
+            Image(viewStore.imageName)
             
             Spacer().frame(height: Metrics.descriptionTopHeight)
             
-            Text("성동구 근처 맛집등록 된 곳이 없어요\n첫 맛집을 발굴해볼까요?")
+            Text(viewStore.descriptionText)
                 .font(
                     Font.custom("SUIT", size: 14)
                         .weight(.medium)
@@ -35,7 +35,7 @@ struct NearRestaurantEmptyView: View {
             
             EmptyViewButton(store.scope(
                 state: \.emptyViewButtonState,
-                action: NearRestaurantEmptyReducer.Action.emptyViewButtonAction
+                action: EmptyDescriptionViewReducer.Action.emptyViewButtonAction
             ))
         }
     }
@@ -43,9 +43,15 @@ struct NearRestaurantEmptyView: View {
 
 struct NearRestaurantEmptyView_Preview: PreviewProvider {
     static var previews: some View {
-        NearRestaurantEmptyView(
-            Store(initialState: NearRestaurantEmptyReducer.State()) {
-                NearRestaurantEmptyReducer()._printChanges()
+        EmptyDescriptionView(
+            Store(
+                initialState: EmptyDescriptionViewReducer.State(
+                    imageName: "empty_near_restaurant",
+                    descriptionText: "성동구 근처 맛집등록 된 곳이 없어요\n첫 맛집을 발굴해볼까요?",
+                    emptyViewButtonState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
+                )
+            ) {
+                EmptyDescriptionViewReducer()._printChanges()
             }
         )
     }

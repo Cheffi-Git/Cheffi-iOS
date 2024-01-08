@@ -19,11 +19,21 @@ struct RestaurantRegistReducer: Reducer {
     struct State: Equatable {
         var error: String?
         var isEmptyNearRestaurant: Bool = false
-        // TODO: Eli - add isEmptyRestaurant
+        var isEmptyRestaurant: Bool = false
         
         var searchBarState = SearchBarReducer.State()
         var nearRestaurantListState = NearRestaurantListReducer.State()
-        var nearRestaurantEmptyState = NearRestaurantEmptyReducer.State()
+        var nearRestaurantEmptyState = EmptyDescriptionViewReducer.State(
+            imageName: "empty_near_restaurant",
+            descriptionText: "성동구 근처 맛집등록 된 곳이 없어요\n첫 맛집을 발굴해볼까요?",
+            emptyViewButtonState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
+        )
+        var restaurantListState = RestaurantListReducer.State()
+        var restaurantEmptyState = EmptyDescriptionViewReducer.State(
+            imageName: "empty_near_restaurant",
+            descriptionText: "찾고있는 맛집이 없나요?",
+            emptyViewButtonState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
+        )
     }
 
     enum Action {
@@ -33,19 +43,20 @@ struct RestaurantRegistReducer: Reducer {
         
         case searchBarAction(SearchBarReducer.Action)
         case nearRestaurantListAction(NearRestaurantListReducer.Action)
-        case nearRestaurantEmptyAction(NearRestaurantEmptyReducer.Action)
+        case nearRestaurantEmptyAction(EmptyDescriptionViewReducer.Action)
+        case restaurantListAction(RestaurantListReducer.Action)
+        case restaurantEmptyAction(EmptyDescriptionViewReducer.Action)
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .getNearRestaurants(let list):
             state.isEmptyNearRestaurant = list.isEmpty
-            state.nearRestaurantListState.restaurantList = list
+            state.nearRestaurantListState.nearRestaurantList = list
             return .none
         case .getRestaurants(let list):
-            // TODO: Eli - Near restaurant -> restaurant
-            state.isEmptyNearRestaurant = list.isEmpty
-            state.nearRestaurantListState.restaurantList = list
+            state.isEmptyRestaurant = list.isEmpty
+            state.restaurantListState.restaurantList = list
             return .none
         case .occerError(let error):
             state.error = error.localizedDescription
@@ -59,7 +70,8 @@ struct RestaurantRegistReducer: Reducer {
                         .catch { Just(Action.occerError($0)) }
                 }
             }
-        case .nearRestaurantEmptyAction(let action):
+        case .nearRestaurantEmptyAction(let action),
+                .restaurantEmptyAction(let action):
             switch action {
             case .emptyViewButtonAction(let action):
                 switch action {

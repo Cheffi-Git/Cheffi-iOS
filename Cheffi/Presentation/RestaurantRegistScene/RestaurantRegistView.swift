@@ -20,20 +20,36 @@ struct RestaurantRegistView: View {
                 action: RestaurantRegistReducer.Action.searchBarAction
             ))
             
-            if viewStore.isEmptyNearRestaurant {
-                NearRestaurantEmptyView(store.scope(
-                    state: \.nearRestaurantEmptyState,
-                    action: RestaurantRegistReducer.Action.nearRestaurantEmptyAction
-                ))
-                
-                Spacer()
+            if viewStore.searchBarState.searchQuery.isEmpty {
+                if viewStore.isEmptyNearRestaurant {
+                    EmptyDescriptionView(store.scope(
+                        state: \.nearRestaurantEmptyState,
+                        action: RestaurantRegistReducer.Action.nearRestaurantEmptyAction
+                    ))
+                    
+                    Spacer()
+                } else {
+                    NearRestaurantListView(store.scope(
+                        state: \.nearRestaurantListState,
+                        action: RestaurantRegistReducer.Action.nearRestaurantListAction
+                    ))
+                    
+                    Spacer()
+                }
             } else {
-                NearRestaurantListView(store.scope(
-                    state: \.nearRestaurantListState,
-                    action: RestaurantRegistReducer.Action.nearRestaurantListAction
-                ))
-                
-                Spacer()
+                if viewStore.isEmptyRestaurant {
+                    EmptyDescriptionView(store.scope(
+                        state: \.restaurantEmptyState,
+                        action: RestaurantRegistReducer.Action.restaurantEmptyAction
+                    ))
+                    
+                    Spacer()
+                } else {
+                    RestaurantListView(store.scope(
+                        state: \.restaurantListState,
+                        action: RestaurantRegistReducer.Action.restaurantListAction
+                    ))
+                }
             }
         }
     }

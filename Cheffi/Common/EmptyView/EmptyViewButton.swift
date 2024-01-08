@@ -35,7 +35,9 @@ struct EmptyViewButton: View {
 struct EmptyViewButton_Preview: PreviewProvider {
     static var previews: some View {
         EmptyViewButton(
-            Store(initialState: EmptyViewButtonReducer.State()) {
+            Store(
+                initialState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
+            ) {
                 EmptyViewButtonReducer()._printChanges()
             }
         )
