@@ -64,6 +64,7 @@ struct RestaurantRegistReducer: Reducer {
         case .searchBarAction(let action):
             switch action {
             case .input(let text):
+                state.searchBarState.searchQuery = text
                 return .publisher {
                     useCase.getRestaurants(name: text, province: "", city: "")
                         .map(Action.getRestaurants)

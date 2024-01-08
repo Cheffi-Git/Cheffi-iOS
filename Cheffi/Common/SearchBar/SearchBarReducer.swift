@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct SearchBarReducer: Reducer {
     struct State: Equatable {
-        var searchQuery: String = "검색어 입력"
+        var searchQuery: String = ""
     }
 
     enum Action {
@@ -19,7 +19,8 @@ struct SearchBarReducer: Reducer {
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .input:
+        case .input(let txt):
+            state.searchQuery = txt
             return .none
         }
     }

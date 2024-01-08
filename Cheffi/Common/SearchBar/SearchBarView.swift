@@ -23,8 +23,9 @@ struct SearchBarView: View {
                 Image(systemName: "magnifyingglass")
                 
                 TextField(
-                    "검색어 입력",
-                    text: viewStore.binding(get: \.searchQuery, send: { .input($0) })
+                    "",
+                    text: viewStore.binding(get: \.searchQuery, send: { .input($0) }),
+                    prompt: Text("등록할 맛집의 상호명을 입력하세요.")
                 )
                 .foregroundColor(.cheffiBlack)
                 
