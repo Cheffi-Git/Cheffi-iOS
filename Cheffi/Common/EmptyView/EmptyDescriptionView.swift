@@ -21,7 +21,8 @@ struct EmptyDescriptionView: View {
             
             Image(viewStore.imageName)
             
-            Spacer().frame(height: Metrics.descriptionTopHeight)
+            Spacer()
+                .frame(height: Metrics.descriptionTopHeight)
             
             Text(viewStore.descriptionText)
                 .font(
@@ -31,7 +32,8 @@ struct EmptyDescriptionView: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.cheffiGray6)
             
-            Spacer().frame(height: Metrics.descriptionTopHeight)
+            Spacer()
+                .frame(height: Metrics.descriptionTopHeight)
             
             EmptyViewButton(store.scope(
                 state: \.emptyViewButtonState,

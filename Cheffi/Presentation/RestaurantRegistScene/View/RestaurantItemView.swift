@@ -10,8 +10,8 @@ import SwiftUI
 struct RestaurantItemView: View {
     private enum Metrics {
         static let itemHeight = 72.0
-        static let padding = EdgeInsets(top: 11.0, leading: 16.0, bottom: 11.0, trailing: 0.0)
-        static let textVerticalPadding = 4.0
+        static let horizontalPadding = 16.0
+        static let spacerHeight = 12.0
     }
     
     let restaurant: RestaurantInfoDTO
@@ -19,28 +19,35 @@ struct RestaurantItemView: View {
     
     var body: some View {
         VStack {
-            Text(restaurant.name)
-                .font(
-                    Font.custom("SUIT", size: 16)
-                        .weight(.medium)
-                )
-                .foregroundColor(.cheffiGray8)
-                .background(.green)
-                .padding(.vertical, Metrics.textVerticalPadding)
-            
-            Text(restaurant.address.fullRodNameAddress)
-                .font(
-                    Font.custom("SUIT", size: 14)
-                        .weight(.medium)
-                )
-                .foregroundColor(.cheffiGray5)
-                .background(.blue)
-                .padding(.vertical, Metrics.textVerticalPadding)
+            VStack {
+                HStack {
+                    Text(restaurant.name)
+                        .font(
+                            Font.custom("SUIT", size: 16)
+                                .weight(.medium)
+                        )
+                        .foregroundColor(.cheffiGray8)
+                    
+                    Spacer()
+                }
+                
+                Spacer()
+                    .frame(height: Metrics.spacerHeight)
+                
+                HStack {
+                    Text("\(restaurant.address.province) \(restaurant.address.city) \(restaurant.address.roadName) \(restaurant.address.fullRodNameAddress)")
+                        .font(
+                            Font.custom("SUIT", size: 14)
+                                .weight(.medium)
+                        )
+                        .foregroundColor(.cheffiGray5)
+                    
+                    Spacer()
+                }
+            }
         }
-        .frame(idealWidth: itemWidth, maxWidth: itemWidth, idealHeight: Metrics.itemHeight, maxHeight: Metrics.itemHeight, alignment: .leading)
-        .background(.orange)
-        .padding(Metrics.padding)
-        .background(.yellow)
+        .frame(idealWidth: itemWidth, maxWidth: itemWidth, idealHeight: Metrics.itemHeight, maxHeight: Metrics.itemHeight)
+        .padding(.horizontal, Metrics.horizontalPadding)
     }
 }
 
