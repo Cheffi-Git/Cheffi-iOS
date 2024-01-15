@@ -10,5 +10,5 @@ import Foundation
 enum RouteStep {
     case restaurantRegistSearch
     case restaurantRegistCompose
-    case restaurantInfoCompose
+    case restaurantInfoCompose(info: RestaurantInfoDTO)
 }

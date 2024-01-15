@@ -45,8 +45,11 @@ final class RestaurantRegistSceneDIContainer: RestaurantRegistFlowCoordinatorDep
     }
     
     // MARK: - Restaurant Info Compose
-    func makeRestaurantInfoComposeViewController(reducer: RestaurantInfoComposeReducer) -> RestaurantInfoComposeViewController {
-        return RestaurantInfoComposeViewController(reducer: reducer)
+    func makeRestaurantInfoComposeViewController(
+        reducer: RestaurantInfoComposeReducer,
+        restaurant: RestaurantInfoDTO
+    ) -> RestaurantInfoComposeViewController {
+        return RestaurantInfoComposeViewController(reducer: reducer, restaurant: restaurant)
     }
     
     func makeRestaurantInfoComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantInfoComposeReducer {

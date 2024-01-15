@@ -19,15 +19,12 @@ struct RestaurantInfoComposeReducer: Reducer {
     }
     
     struct State: Equatable {
-        
+        var restaurant: RestaurantInfoDTO
     }
     
-    enum Action {
-        
-    }
+    enum Action {}
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-    }
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {}
 }
 
 extension RestaurantInfoComposeReducer: Stepper {}

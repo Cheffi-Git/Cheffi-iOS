@@ -101,6 +101,12 @@ struct RestaurantRegistReducer: Reducer {
                 steps.send(.restaurantRegistCompose)
                 return .none
             }
+        case .restaurantListAction(let action):
+            switch action {
+            case .tap(let item):
+                steps.send(.restaurantInfoCompose(info: item))
+                return .none
+            }
         }
     }
 }

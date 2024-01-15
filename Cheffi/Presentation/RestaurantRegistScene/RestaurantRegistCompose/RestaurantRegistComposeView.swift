@@ -13,7 +13,7 @@ import ViewStore
 @ViewStore(RestaurantRegistComposeReducer.self)
 struct RestaurantRegistComposeView: View {
     var body: some View {
-        Text("Hello, World!")
+        Text("RestaurantRegistComposeView")
     }
 }
 

@@ -10,9 +10,14 @@ import ComposableArchitecture
 
 class RestaurantInfoComposeViewController: UIViewController {
     private let reducer: RestaurantInfoComposeReducer
+    private let restaurant: RestaurantInfoDTO
     
-    init(reducer: RestaurantInfoComposeReducer) {
+    init(
+        reducer: RestaurantInfoComposeReducer,
+        restaurant: RestaurantInfoDTO
+    ) {
         self.reducer = reducer
+        self.restaurant = restaurant
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,7 +30,9 @@ class RestaurantInfoComposeViewController: UIViewController {
 
         addHostingController(
             view: RestaurantInfoComposeView(
-                Store(initialState: RestaurantInfoComposeReducer.State()) {
+                Store(initialState: RestaurantInfoComposeReducer.State(
+                    restaurant: restaurant
+                )) {
                     reducer._printChanges()
                 }
             )
