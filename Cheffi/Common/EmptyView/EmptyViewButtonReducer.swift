@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct EmptyViewButtonReducer: Reducer {
     struct State: Equatable {
-        var title: String
+        let title: String
     }
     
     enum Action {

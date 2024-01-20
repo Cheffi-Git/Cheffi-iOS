@@ -26,24 +26,24 @@ struct RestaurantRegistReducer: Reducer {
         var isEmptyNearRestaurant: Bool = false
         var isEmptyRestaurant: Bool = false
         
-        var navigationBarState = NavigationBarReducer.State(
+        let navigationBarState = NavigationBarReducer.State(
             title: "내 맛집 등록",
             buttonKind: .close
         )
         var searchBarState = SearchBarReducer.State()
         var nearRestaurantListState = NearRestaurantListReducer.State()
-        var nearRestaurantEmptyState = EmptyDescriptionViewReducer.State(
+        let nearRestaurantEmptyState = EmptyDescriptionViewReducer.State(
             imageName: "empty_near_restaurant",
             descriptionText: "성동구 근처 맛집등록 된 곳이 없어요\n첫 맛집을 발굴해볼까요?",
             emptyViewButtonState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
         )
         var restaurantListState = RestaurantListReducer.State()
-        var restaurantEmptyState = EmptyDescriptionViewReducer.State(
+        let restaurantEmptyState = EmptyDescriptionViewReducer.State(
             imageName: "empty_restaurant",
             descriptionText: "찾고있는 맛집이 없나요?",
             emptyViewButtonState: EmptyViewButtonReducer.State(title: "맛집 직접 등록하기")
         )
-        var emptyViewButtonState = EmptyViewButtonReducer.State(title: "등록하기")
+        let emptyViewButtonState = EmptyViewButtonReducer.State(title: "등록하기")
     }
 
     enum Action {
