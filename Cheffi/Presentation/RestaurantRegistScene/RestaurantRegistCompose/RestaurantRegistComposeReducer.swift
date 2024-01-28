@@ -19,6 +19,34 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     struct State: Equatable {
+        let navigationBarState = NavigationBarReducer.State(
+            title: "내 맛집 등록",
+            buttonKind: .back
+        )
+        var provinceDropDownPickerState = DropDownPickerReducer.State(
+            placeHolder: "광역시 / 도",
+            selection: nil,
+            options: [
+                "서울특별시",
+                "인천광역시",
+                "부산광역시",
+                "서울특별시2",
+                "인천광역시2",
+                "부산광역시2",
+                "서울특별시3",
+                "인천광역시3",
+                "부산광역시3"
+            ]
+        )
+        var cityDropDownPickerState = DropDownPickerReducer.State(
+            placeHolder: "시 / 군 / 구",
+            selection: nil,
+            options: [
+                "강남구",
+                "강동구",
+                "강북구"
+            ]
+        )
         var roadNameAddressTextFieldBarState = TextFieldBarReducer.State(placeHolder: "도로명 주소 입력")
         var restaurantNameTextFieldBarState = TextFieldBarReducer.State(placeHolder: "식당 이름")
         var bottomButtonState = BottomButtonReducer.State(
@@ -28,13 +56,40 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     enum Action {
+        case navigaionBarAction(NavigationBarReducer.Action)
+        case provinceDropDownPickerAction(DropDownPickerReducer.Action)
+        case cityDropDownPickerAction(DropDownPickerReducer.Action)
         case roadNameAddressTextFieldBarAction(TextFieldBarReducer.Action)
         case restaurantNameTextFieldBarAction(TextFieldBarReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        .none
+        switch action {
+        case .provinceDropDownPickerAction(let action):
+            switch action {
+            case .toggleDropDown:
+                state.provinceDropDownPickerState.isShowDropdown.toggle()
+                return .none
+            case .select(let option):
+                state.provinceDropDownPickerState.selection = option
+                state.provinceDropDownPickerState.isShowDropdown.toggle()
+                return .none
+            }
+        case .cityDropDownPickerAction(let action):
+            switch action {
+            case .toggleDropDown:
+                state.cityDropDownPickerState.isShowDropdown.toggle()
+                return .none
+            case .select(let option):
+                state.cityDropDownPickerState.selection = option
+                state.cityDropDownPickerState.isShowDropdown.toggle()
+                return .none
+            }
+        default:
+            // TODO: - Eli
+            return .none
+        }
     }
 }
 

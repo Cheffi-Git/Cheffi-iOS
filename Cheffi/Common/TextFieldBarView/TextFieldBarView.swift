@@ -36,7 +36,7 @@ struct TextFieldBarView: View {
             }
             .padding(Metrics.barPadding)
             .frame(height: Metrics.barHeight)
-            .background(isFocused ? .red : .white)
+            .background(.cheffiWhite)
             .cornerRadius(Metrics.barCornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: Metrics.barCornerRadius)
