@@ -19,14 +19,18 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     struct State: Equatable {
-        
+        var bottomButtonState = BottomButtonReducer.State(
+            title: "다음",
+            able: false
+        )
     }
     
     enum Action {
-        
+        case bottomButtonAction(BottomButtonReducer.Action)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
+        .none
     }
 }
 

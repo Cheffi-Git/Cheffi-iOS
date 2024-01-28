@@ -12,8 +12,51 @@ import ViewStore
 
 @ViewStore(RestaurantRegistComposeReducer.self)
 struct RestaurantRegistComposeView: View {
+    private enum Metrics {
+        static let outerVStackLeftPadding = 16.0
+        static let headlineTextPadding = EdgeInsets(top: 32.0, leading: 0, bottom: 4.0, trailing: 0)
+        static let titleTextTopPadding = 20.0
+    }
+    
     var body: some View {
-        Text("RestaurantRegistComposeView")
+        VStack {
+            VStack {
+                Text("등록하는 식당의\n정보를 알려주세요.")
+                    .font(
+                        Font.custom("SUIT", size: 20)
+                            .weight(.bold)
+                    )
+                    .foregroundColor(.cheffiGray8)
+                    .padding(Metrics.headlineTextPadding)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text("주소")
+                    .font(
+                        Font.custom("SUIT", size: 14)
+                            .weight(.bold)
+                    )
+                    .foregroundColor(.cheffiGray8)
+                    .padding(.top, Metrics.titleTextTopPadding)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text("식당이름")
+                    .font(
+                        Font.custom("SUIT", size: 14)
+                            .weight(.bold)
+                    )
+                    .foregroundColor(.cheffiGray8)
+                    .padding(.top, Metrics.titleTextTopPadding)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+            }
+            .padding(.horizontal, Metrics.outerVStackLeftPadding)
+            
+            BottomButtonView(store.scope(
+                state: \.bottomButtonState,
+                action: RestaurantRegistComposeReducer.Action.bottomButtonAction
+            ))
+        }
     }
 }
 
