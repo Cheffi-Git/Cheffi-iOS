@@ -13,7 +13,7 @@ import ViewStore
 @ViewStore(RestaurantRegistComposeReducer.self)
 struct RestaurantRegistComposeView: View {
     private enum Metrics {
-        static let outerVStackLeftPadding = 16.0
+        static let safeAreaPadding = 16.0
         static let headlineTextPadding = EdgeInsets(top: 32.0, leading: 0, bottom: 4.0, trailing: 0)
         static let titleTextTopPadding = 20.0
     }
@@ -39,6 +39,11 @@ struct RestaurantRegistComposeView: View {
                     .padding(.top, Metrics.titleTextTopPadding)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
+                TextFieldBarView(store.scope(
+                    state: \.roadNameAddressTextFieldBarState,
+                    action: RestaurantRegistComposeReducer.Action.roadNameAddressTextFieldBarAction
+                ))
+                
                 Text("식당이름")
                     .font(
                         Font.custom("SUIT", size: 14)
@@ -48,15 +53,20 @@ struct RestaurantRegistComposeView: View {
                     .padding(.top, Metrics.titleTextTopPadding)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
+                TextFieldBarView(store.scope(
+                    state: \.restaurantNameTextFieldBarState,
+                    action: RestaurantRegistComposeReducer.Action.restaurantNameTextFieldBarAction
+                ))
+                
                 Spacer()
             }
-            .padding(.horizontal, Metrics.outerVStackLeftPadding)
             
             BottomButtonView(store.scope(
                 state: \.bottomButtonState,
                 action: RestaurantRegistComposeReducer.Action.bottomButtonAction
             ))
         }
+        .safeAreaPadding(.horizontal, Metrics.safeAreaPadding)
     }
 }
 

@@ -12,7 +12,6 @@ import ViewStore
 @ViewStore(BottomButtonReducer.self)
 struct BottomButtonView: View {
     private enum Metrics {
-        static let outerPadding = 16.0
         static let buttonPadding = 12.0
         static let buttonCornerRadius = 10.0
     }
@@ -30,7 +29,6 @@ struct BottomButtonView: View {
             .background(viewStore.able ? .mainCTA : .cheffiGray1)
             .cornerRadius(Metrics.buttonCornerRadius)
         }
-        .padding(Metrics.outerPadding)
     }
 }
 

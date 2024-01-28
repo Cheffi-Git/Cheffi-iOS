@@ -19,6 +19,8 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     struct State: Equatable {
+        var roadNameAddressTextFieldBarState = TextFieldBarReducer.State(placeHolder: "도로명 주소 입력")
+        var restaurantNameTextFieldBarState = TextFieldBarReducer.State(placeHolder: "식당 이름")
         var bottomButtonState = BottomButtonReducer.State(
             title: "다음",
             able: false
@@ -26,6 +28,8 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     enum Action {
+        case roadNameAddressTextFieldBarAction(TextFieldBarReducer.Action)
+        case restaurantNameTextFieldBarAction(TextFieldBarReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     

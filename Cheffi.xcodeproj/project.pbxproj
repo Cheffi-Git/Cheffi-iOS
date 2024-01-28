@@ -21,6 +21,8 @@
 		6B08FEA42B54216600BBC74B /* RestaurantInfoComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08FEA32B54216600BBC74B /* RestaurantInfoComposeView.swift */; };
 		6B08FEA62B54217000BBC74B /* RestaurantInfoComposeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08FEA52B54217000BBC74B /* RestaurantInfoComposeReducer.swift */; };
 		6B3E2FA52B49C8F600828648 /* ViewStore in Frameworks */ = {isa = PBXBuildFile; productRef = 6B3E2FA42B49C8F600828648 /* ViewStore */; };
+		6B40B2FB2B6641F200945946 /* TextFieldBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40B2FA2B6641F200945946 /* TextFieldBarView.swift */; };
+		6B40B2FD2B66454200945946 /* TextFieldBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40B2FC2B66454200945946 /* TextFieldBarReducer.swift */; };
 		6B7174372B42DD82009FEF35 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7174362B42DD82009FEF35 /* NavigationBarView.swift */; };
 		6B7D8AEF2B53FBAF00786ACE /* RouteStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D8AEE2B53FBAF00786ACE /* RouteStep.swift */; };
 		6B7D8AF22B54030900786ACE /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D8AF12B54030900786ACE /* Stepper.swift */; };
@@ -340,6 +342,8 @@
 		6B08FEA32B54216600BBC74B /* RestaurantInfoComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoComposeView.swift; sourceTree = "<group>"; };
 		6B08FEA52B54217000BBC74B /* RestaurantInfoComposeReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoComposeReducer.swift; sourceTree = "<group>"; };
 		6B3E2FA32B49C78C00828648 /* ViewStore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewStore; sourceTree = "<group>"; };
+		6B40B2FA2B6641F200945946 /* TextFieldBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBarView.swift; sourceTree = "<group>"; };
+		6B40B2FC2B66454200945946 /* TextFieldBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBarReducer.swift; sourceTree = "<group>"; };
 		6B7174362B42DD82009FEF35 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		6B7D8AEE2B53FBAF00786ACE /* RouteStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStep.swift; sourceTree = "<group>"; };
 		6B7D8AF12B54030900786ACE /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
@@ -720,6 +724,15 @@
 			path = RestaurantInfoCompose;
 			sourceTree = "<group>";
 		};
+		6B40B2F92B6641C500945946 /* TextFieldBarView */ = {
+			isa = PBXGroup;
+			children = (
+				6B40B2FA2B6641F200945946 /* TextFieldBarView.swift */,
+				6B40B2FC2B66454200945946 /* TextFieldBarReducer.swift */,
+			);
+			path = TextFieldBarView;
+			sourceTree = "<group>";
+		};
 		6B7174352B42DD71009FEF35 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,6 +887,7 @@
 		CE1A6A792A62960A00FFE93D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6B40B2F92B6641C500945946 /* TextFieldBarView */,
 				6B007B0B2B64E1A7005BF86C /* BottomButtonView */,
 				6BA9F55E2B4C4AD000A96321 /* EmptyView */,
 				6B7174352B42DD71009FEF35 /* NavigationBar */,
@@ -2014,6 +2028,7 @@
 				FF6801382AD2B068001AB6E8 /* Results.swift in Sources */,
 				D4DBE8502B13042300D66800 /* RecommendedSearchLayoutProvider.swift in Sources */,
 				6BA9F5572B4AE5EE00A96321 /* EmptyViewButtonReducer.swift in Sources */,
+				6B40B2FB2B6641F200945946 /* TextFieldBarView.swift in Sources */,
 				D420F1672AE4F6D800DC10ED /* AreaSelectionViewModel.swift in Sources */,
 				CE0D45212A618E5700636989 /* NationalTrendFlowCoordinator.swift in Sources */,
 				D4DC4A792B14D56E00651E62 /* RecommendedSearchCell.swift in Sources */,
@@ -2022,6 +2037,7 @@
 				CE42BA712A6BCF3A00EBB80A /* UIViewController+Extensions.swift in Sources */,
 				6B08FEA42B54216600BBC74B /* RestaurantInfoComposeView.swift in Sources */,
 				FFA6BA832ADAEE380094913E /* TagAPIEndpoints.swift in Sources */,
+				6B40B2FD2B66454200945946 /* TextFieldBarReducer.swift in Sources */,
 				FFB29BC32ACBE0C8000E473E /* DefaultNotificationRepository.swift in Sources */,
 				D4EEF21E2A91CE70008107DF /* Content.swift in Sources */,
 				D420F16F2AE64BA600DC10ED /* AreaRepository.swift in Sources */,
