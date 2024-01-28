@@ -11,7 +11,7 @@ import ComposableArchitecture
 struct BottomButtonReducer: Reducer {
     struct State: Equatable {
         let title: String
-        let able: Bool
+        var able: Bool
     }
     
     enum Action {

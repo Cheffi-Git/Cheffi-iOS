@@ -19,6 +19,10 @@ struct TextFieldBarReducer: Reducer {
     }
 
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        .none
+        switch action {
+        case .input(let txt):
+            state.txt = txt
+            return .none
+        }
     }
 }

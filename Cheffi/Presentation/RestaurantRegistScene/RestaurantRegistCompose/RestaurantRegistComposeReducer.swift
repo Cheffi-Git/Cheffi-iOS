@@ -62,6 +62,7 @@ struct RestaurantRegistComposeReducer: Reducer {
         case roadNameAddressTextFieldBarAction(TextFieldBarReducer.Action)
         case restaurantNameTextFieldBarAction(TextFieldBarReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
+        case setEnableNext
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -74,7 +75,7 @@ struct RestaurantRegistComposeReducer: Reducer {
             case .select(let option):
                 state.provinceDropDownPickerState.selection = option
                 state.provinceDropDownPickerState.isShowDropdown.toggle()
-                return .none
+                return .send(.setEnableNext)
             }
         case .cityDropDownPickerAction(let action):
             switch action {
@@ -84,8 +85,27 @@ struct RestaurantRegistComposeReducer: Reducer {
             case .select(let option):
                 state.cityDropDownPickerState.selection = option
                 state.cityDropDownPickerState.isShowDropdown.toggle()
-                return .none
+                return .send(.setEnableNext)
             }
+        case .roadNameAddressTextFieldBarAction(let action):
+            switch action {
+            case .input(let txt):
+                state.roadNameAddressTextFieldBarState.txt = txt
+                return .send(.setEnableNext)
+            }
+        case .restaurantNameTextFieldBarAction(let action):
+            switch action {
+            case .input(let txt):
+                state.restaurantNameTextFieldBarState.txt = txt
+                return .send(.setEnableNext)
+            }
+        case .setEnableNext:
+            let enable = state.provinceDropDownPickerState.selection != nil &&
+            state.cityDropDownPickerState.selection != nil &&
+            !state.roadNameAddressTextFieldBarState.txt.isEmpty &&
+            !state.restaurantNameTextFieldBarState.txt.isEmpty
+            state.bottomButtonState.able = enable
+            return .none
         default:
             // TODO: - Eli
             return .none
