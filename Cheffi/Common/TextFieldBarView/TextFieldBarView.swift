@@ -31,7 +31,7 @@ struct TextFieldBarView: View {
                     prompt: Text(viewStore.placeHolder)
                 )
                 .font(Font.custom("SUIT", size: 14))
-                .foregroundColor(.cheffiGray10)
+                .foregroundColor(.cheffiGray9)
                 .focused($isFocused)
             }
             .padding(Metrics.barPadding)
@@ -42,7 +42,7 @@ struct TextFieldBarView: View {
                 RoundedRectangle(cornerRadius: Metrics.barCornerRadius)
                     .inset(by: Metrics.barBorderInset)
                     .stroke(
-                        isFocused ? .cheffiGray10 : .cheffiGray3,
+                        isFocused ? .cheffiGray9 : .cheffiGray3,
                         lineWidth: Metrics.barBorderWidth
                     )
             )
