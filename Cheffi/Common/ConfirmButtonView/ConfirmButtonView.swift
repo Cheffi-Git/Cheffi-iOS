@@ -1,5 +1,5 @@
 //
-//  BottomButtonView.swift
+//  ConfirmButtonView.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/27/24.
@@ -9,9 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 import ViewStore
 
-@ViewStore(BottomButtonReducer.self)
-struct BottomButtonView: View {
+@ViewStore(ConfirmButtonReducer.self)
+struct ConfirmButtonView: View {
     private enum Metrics {
+        static let buttonViewPadding = 16.0
         static let buttonPadding = 12.0
         static let buttonCornerRadius = 10.0
     }
@@ -25,21 +26,29 @@ struct BottomButtonView: View {
             .frame(maxWidth: .infinity)
             .padding(Metrics.buttonPadding)
             .disabled(!viewStore.able)
-            .foregroundColor(viewStore.able ? .white : .cheffiGray5)
+            .foregroundColor(viewStore.able ? .cheffiWhite : .cheffiGray5)
             .background(viewStore.able ? .mainCTA : .cheffiGray1)
             .cornerRadius(Metrics.buttonCornerRadius)
         }
+        .padding(.vertical, Metrics.buttonViewPadding)
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [.clear, .cheffiWhite, .cheffiWhite]),
+                startPoint: .top,
+                endPoint: .center
+            )
+        )
     }
 }
 
-struct BottomButtonView_Preview: PreviewProvider {
+struct ConfirmButtonView_Preview: PreviewProvider {
     static var previews: some View {
-        BottomButtonView(
-            Store(initialState: BottomButtonReducer.State(
+        ConfirmButtonView(
+            Store(initialState: ConfirmButtonReducer.State(
                 title: "다음",
                 able: false
             )) {
-                BottomButtonReducer()._printChanges()
+                ConfirmButtonReducer()._printChanges()
             }
         )
     }
