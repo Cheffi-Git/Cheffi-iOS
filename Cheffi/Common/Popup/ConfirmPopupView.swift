@@ -44,26 +44,26 @@ struct ConfirmPopupView: View {
                                     viewStore.send(.secondary)
                                 } label: {
                                     Text(secondaryButtonTitle)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(Metrics.buttonPadding)
+                                        .font(.custom("SUIT", size: 16).weight(.medium))
+                                        .foregroundColor(.cheffiGray6)
+                                        .background(.cheffiWhite05)
+                                        .cornerRadius(Metrics.buttonCornerRadius)
                                 }
-                                .frame(maxWidth: .infinity)
-                                .padding(Metrics.buttonPadding)
-                                .font(.custom("SUIT", size: 16).weight(.medium))
-                                .foregroundColor(.cheffiGray6)
-                                .background(.cheffiWhite05)
-                                .cornerRadius(Metrics.buttonCornerRadius)
                             }
                             
                             Button {
                                 viewStore.send(.primary)
                             } label: {
                                 Text(viewStore.primaryButtonTitle)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(Metrics.buttonPadding)
+                                    .font(.custom("SUIT", size: 16).weight(.medium))
+                                    .foregroundColor(.cheffiWhite)
+                                    .background(.mainCTA)
+                                    .cornerRadius(Metrics.buttonCornerRadius)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(Metrics.buttonPadding)
-                            .font(.custom("SUIT", size: 16).weight(.medium))
-                            .foregroundColor(.cheffiWhite)
-                            .background(.mainCTA)
-                            .cornerRadius(Metrics.buttonCornerRadius)
                         }
                         .padding(.top, Metrics.buttonsHStackTopPadding)
                     }
@@ -77,11 +77,11 @@ struct ConfirmPopupView: View {
                             viewStore.send(.option)
                         } label: {
                             Text(optionButtonTitle)
+                                .frame(maxWidth: .infinity)
+                                .padding(Metrics.buttonPadding)
+                                .font(.custom("SUIT", size: 16).weight(.medium))
+                                .foregroundColor(.cheffiWhite)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding(Metrics.buttonPadding)
-                        .font(.custom("SUIT", size: 16).weight(.medium))
-                        .foregroundColor(.cheffiWhite)
                     }
                 }
                 .padding(.horizontal, Metrics.safeAreaPadding)

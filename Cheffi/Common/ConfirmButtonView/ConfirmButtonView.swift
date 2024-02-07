@@ -22,13 +22,13 @@ struct ConfirmButtonView: View {
                 viewStore.send(.tap)
             } label: {
                 Text(viewStore.title)
+                    .frame(maxWidth: .infinity)
+                    .padding(Metrics.buttonPadding)
+                    .disabled(!viewStore.able)
+                    .foregroundColor(viewStore.able ? .cheffiWhite : .cheffiGray5)
+                    .background(viewStore.able ? .mainCTA : .cheffiGray1)
+                    .cornerRadius(Metrics.buttonCornerRadius)
             }
-            .frame(maxWidth: .infinity)
-            .padding(Metrics.buttonPadding)
-            .disabled(!viewStore.able)
-            .foregroundColor(viewStore.able ? .cheffiWhite : .cheffiGray5)
-            .background(viewStore.able ? .mainCTA : .cheffiGray1)
-            .cornerRadius(Metrics.buttonCornerRadius)
         }
         .padding(.vertical, Metrics.buttonViewPadding)
         .background(
@@ -46,7 +46,7 @@ struct ConfirmButtonView_Preview: PreviewProvider {
         ConfirmButtonView(
             Store(initialState: ConfirmButtonReducer.State(
                 title: "다음",
-                able: false
+                able: true
             )) {
                 ConfirmButtonReducer()._printChanges()
             }
