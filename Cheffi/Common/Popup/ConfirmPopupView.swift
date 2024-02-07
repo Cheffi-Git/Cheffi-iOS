@@ -23,7 +23,7 @@ struct ConfirmPopupView: View {
     
     var body: some View {
         ZStack {
-            Color.cheffiDim40
+            Color.cheffiDimmed
             
             GeometryReader {
                 VStack(spacing: Metrics.popupVStackSpacing) {
