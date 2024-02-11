@@ -23,6 +23,8 @@ struct RestaurantInfoComposeView: View {
         static let attatchPhotoButtonCornerRadius = 8.0
     }
     
+    @State private var isShowAlertAction: Bool = false
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -52,13 +54,10 @@ struct RestaurantInfoComposeView: View {
                     LazyHStack {
                         
                     }
-                    .frame(
-                        width: .infinity,
-                        height: Metrics.photoThumbnailImageSize.height
-                    )
+                    .frame(height: Metrics.photoThumbnailImageSize.height)
                     
                     Button {
-                        
+                        self.isShowAlertAction = true
                     } label: {
                         HStack(spacing: Metrics.attatchPhotoButtonContentsSpacing) {
                             Image(.attatchPhoto)
@@ -68,6 +67,19 @@ struct RestaurantInfoComposeView: View {
                         }
                         .padding(Metrics.attatchPhotoButtonPadding)
                         .frame(maxWidth: .infinity)
+                    }
+                    .confirmationDialog(
+                        "",
+                        isPresented: $isShowAlertAction, 
+                        titleVisibility: .hidden
+                    ) {
+                        Button("직접 찍기") {
+                            // TODO: 카메라 촬영 시작
+                        }
+                        
+                        Button("앨범에서 선택") {
+                            viewStore.send(.startSelectPhoto)
+                        }
                     }
                     .overlay(
                         RoundedRectangle(cornerRadius: Metrics.attatchPhotoButtonCornerRadius)

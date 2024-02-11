@@ -36,6 +36,7 @@ struct RestaurantInfoComposeReducer: Reducer {
     
     enum Action {
         case navigaionBarAction(NavigationBarReducer.Action)
+        case startSelectPhoto
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     
@@ -54,6 +55,9 @@ struct RestaurantInfoComposeReducer: Reducer {
                 // steps.send(.hashtag....)
                 return .none
             }
+        case .startSelectPhoto:
+            // TODO: -
+            return .none
         }
     }
 }
