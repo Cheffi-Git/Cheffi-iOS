@@ -14,8 +14,9 @@ import ViewStore
 struct RestaurantInfoComposeView: View {
     private enum Metrics {
         static let safeAreaPadding = 16.0
-        static let headlineTextTopPadding = 32.0
+        static let headlineTextPadding = EdgeInsets(top: 32, leading: 0, bottom: 4, trailing: 0)
         static let headlineTextHorizontalSpacing = 8.0
+        static let photoListTopPadding = 12.0
         static let photoThumbnailImageSize = CGSize(width: 88.0, height: 88.0)
         static let attatchPhotoButtonContentsSpacing = 4.0
         static let attatchPhotoButtonViewPadding = 16.0
@@ -48,13 +49,41 @@ struct RestaurantInfoComposeView: View {
                             .minimumScaleFactor(0.5)
                             .foregroundColor(.cheffiGray5)
                     }
-                    .padding(.top, Metrics.headlineTextTopPadding)
+                    .padding(Metrics.headlineTextPadding)
                     
-                    // TODO: Eli - 첨부된 사진들이 있다면..
-                    LazyHStack {
-                        
+                    if !viewStore.selectedImageDatas.isEmpty {
+                        ScrollView(.horizontal) {
+                            LazyHStack(spacing: 8.0) {
+                                ForEach(viewStore.selectedImageDatas, id: \.self) { data in
+                                    if let uiImage = UIImage(data: data) {
+                                        ZStack {
+                                            Image(uiImage: uiImage)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(
+                                                    width: Metrics.photoThumbnailImageSize.width,
+                                                    height: Metrics.photoThumbnailImageSize.height
+                                                )
+                                                .cornerRadius(Metrics.attatchPhotoButtonCornerRadius)
+                                                .clipped()
+                                            
+                                            Button {
+                                                viewStore.send(.deselectPhoto(data))
+                                            } label: {
+                                                Image(.icCloseCircle)
+                                                    .position(CGPoint(
+                                                        x: Metrics.photoThumbnailImageSize.width - 16.0,
+                                                        y: 16.0
+                                                    ))
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .frame(height: Metrics.photoThumbnailImageSize.height)
+                        .padding(.top, Metrics.photoListTopPadding)
                     }
-                    .frame(height: Metrics.photoThumbnailImageSize.height)
                     
                     Button {
                         self.isShowAlertAction = true
@@ -74,11 +103,11 @@ struct RestaurantInfoComposeView: View {
                         titleVisibility: .hidden
                     ) {
                         Button("직접 찍기") {
-                            // TODO: 카메라 촬영 시작
+                            viewStore.send(.startCamera)
                         }
                         
                         Button("앨범에서 선택") {
-                            viewStore.send(.startSelectPhoto)
+                            viewStore.send(.startAlbumSelection)
                         }
                     }
                     .overlay(
@@ -92,13 +121,14 @@ struct RestaurantInfoComposeView: View {
                     .padding(.vertical, Metrics.attatchPhotoButtonViewPadding)
                     .foregroundColor(.mainCTA)
                 } // 사진첨부 영역
+                .animation(.snappy, value: viewStore.selectedImageDatas.isEmpty)
                 
                 // 리뷰작성 영역
                 VStack(spacing: 0) {
                     Text("어떤 메뉴를 드셨나요?")
                         .font(.custom("SUIT", size: 20).weight(.semibold))
                         .foregroundColor(.cheffiGray8)
-                        .padding(.top, Metrics.headlineTextTopPadding)
+                        .padding(Metrics.headlineTextPadding)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                 } // 리뷰작성 영역
@@ -144,7 +174,14 @@ struct RestaurantInfoComposeView_Preview: PreviewProvider {
                         fullRodNameAddress: "11-22"
                     ),
                     registered: false
-                )
+                ),
+                selectedImageDatas: [
+                    UIImage(resource: .icCamera).pngData()!,
+                    UIImage(resource: .icAppleLogo).pngData()!,
+                    UIImage(resource: .icArrowRight).pngData()!,
+                    UIImage(resource: .loginBackground).pngData()!,
+                    UIImage(resource: .icSearch).pngData()!
+                ]
             )) {
                 RestaurantInfoComposeReducer(
                     useCase: PreviewRestaurantRegistUseCase(),

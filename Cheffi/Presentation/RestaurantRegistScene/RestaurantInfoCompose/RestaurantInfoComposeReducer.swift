@@ -24,6 +24,8 @@ struct RestaurantInfoComposeReducer: Reducer {
     struct State: Equatable {
         var restaurant: RestaurantInfoDTO
         
+        var selectedImageDatas: [Data] = []
+        
         let navigationBarState = NavigationBarReducer.State(
             title: "내 맛집 등록",
             buttonKind: .back
@@ -36,8 +38,11 @@ struct RestaurantInfoComposeReducer: Reducer {
     
     enum Action {
         case navigaionBarAction(NavigationBarReducer.Action)
-        case startSelectPhoto
+        case startCamera
+        case startAlbumSelection
+        case appendImageDatas([Data?])
         case bottomButtonAction(BottomButtonReducer.Action)
+        case deselectPhoto(Data)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
@@ -48,6 +53,37 @@ struct RestaurantInfoComposeReducer: Reducer {
                 steps.send(.popToNavigationController)
                 return .none
             }
+        case .startCamera:
+            let stepAsync: () async -> Data? = {
+                await withCheckedContinuation { continuation in
+                    steps.send(.presentCamera(isPresentPhotoAlbum: false, dismissCompletion: {
+                        continuation.resume(returning: $0)
+                    }))
+                }
+            }
+            return .run { send in
+                let datas = await stepAsync()
+                await send(.appendImageDatas([datas]))
+            }
+        case .startAlbumSelection:
+            let stepAsync: () async -> [Data?] = {
+                await withCheckedContinuation { continuation in
+                    steps.send(.presentPhotoAlbum(dismissCompletion: {
+                        continuation.resume(returning: $0)
+                    }))
+                }
+            }
+            return .run { send in
+                let datas = await stepAsync()
+                await send(.appendImageDatas(datas))
+            }
+        case .appendImageDatas(let datas):
+            let flatDatas = datas.compactMap { $0 }
+            state.selectedImageDatas.append(contentsOf: flatDatas)
+            return .none
+        case .deselectPhoto(let data):
+            state.selectedImageDatas = state.selectedImageDatas.filter { $0 != data }
+            return .none
         case .bottomButtonAction(let action):
             switch action {
             case .tap:
@@ -55,9 +91,6 @@ struct RestaurantInfoComposeReducer: Reducer {
                 // steps.send(.hashtag....)
                 return .none
             }
-        case .startSelectPhoto:
-            // TODO: -
-            return .none
         }
     }
 }
