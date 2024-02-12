@@ -77,9 +77,11 @@ struct RestaurantInfoComposeView: View {
                                                     ))
                                             }
                                         }
+                                        .animation(.snappy, value: data)
                                     }
                                 }
                             }
+                            .animation(.snappy, value: viewStore.selectedImageDatas)
                         }
                         .frame(height: Metrics.photoThumbnailImageSize.height)
                         .padding(.top, Metrics.photoListTopPadding)
@@ -146,15 +148,7 @@ struct RestaurantInfoComposeView: View {
                 ))
             }
             .padding(.horizontal, Metrics.safeAreaPadding)
-            
-//            if viewStore.isShowConfirmPopup {
-//                ConfirmPopupView(store.scope(
-//                    state: \.confirmPopupState,
-//                    action: RestaurantRegistComposeReducer.Action.confirmPopupAction
-//                ))
-//            }
         }
-//        .animation(.default, value: viewStore.isShowConfirmPopup)
     }
 }
 
