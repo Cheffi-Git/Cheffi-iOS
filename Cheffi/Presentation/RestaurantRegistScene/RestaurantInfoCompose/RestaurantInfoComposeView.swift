@@ -16,13 +16,14 @@ struct RestaurantInfoComposeView: View {
         static let safeAreaPadding = 16.0
         static let headlineTextPadding = EdgeInsets(top: 32, leading: 0, bottom: 4, trailing: 0)
         static let headlineTextHorizontalSpacing = 8.0
-        static let smallHeadlineTextTopPadding = 8.0
         static let photoListTopPadding = 12.0
         static let photoThumbnailImageSize = CGSize(width: 88.0, height: 88.0)
         static let attatchPhotoButtonContentsSpacing = 4.0
         static let attatchPhotoButtonViewPadding = 16.0
         static let attatchPhotoButtonPadding = 8.0
         static let attatchPhotoButtonCornerRadius = 8.0
+        static let smallHeadlineTextTopPadding = 8.0
+        static let mainTextEditorHeight = 192.0
     }
     
     @State private var isShowAlertAction: Bool = false
@@ -129,7 +130,7 @@ struct RestaurantInfoComposeView: View {
                 // 리뷰작성 영역
                 VStack(spacing: 0) {
                     Text("제목")
-                        .font(Font.custom("SUIT", size: 14))
+                        .font(.custom("SUIT", size: 14))
                         .foregroundColor(.cheffiGray8)
                         .padding(.top, Metrics.smallHeadlineTextTopPadding)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -138,6 +139,12 @@ struct RestaurantInfoComposeView: View {
                         state: \.titleTextFieldBarState,
                         action: RestaurantInfoComposeReducer.Action.titleTextFieldBarAction
                     ))
+                    
+                    TextEditorView(store.scope(
+                        state: \.mainTextEditorViewState,
+                        action: RestaurantInfoComposeReducer.Action.mainTextEditorViewAction
+                    ))
+                    .frame(height: Metrics.mainTextEditorHeight)
                 } // 리뷰작성 영역
                 
                 // 메뉴선택 영역

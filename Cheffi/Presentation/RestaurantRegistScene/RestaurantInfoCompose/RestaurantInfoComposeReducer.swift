@@ -31,6 +31,10 @@ struct RestaurantInfoComposeReducer: Reducer {
             buttonKind: .back
         )
         var titleTextFieldBarState: TextFieldBarReducer.State
+        var mainTextEditorViewState = TextEditorViewReducer.State(
+            placeHolder: "음식의 맛, 양, 포장 상태 등 음식에 대한 솔직한 리뷰를 남겨주세요.",
+            minCount: 100
+        )
         var bottomButtonState = BottomButtonReducer.State(
             title: "다음",
             able: false
@@ -45,6 +49,7 @@ struct RestaurantInfoComposeReducer: Reducer {
         case setEnableNext
         case navigaionBarAction(NavigationBarReducer.Action)
         case titleTextFieldBarAction(TextFieldBarReducer.Action)
+        case mainTextEditorViewAction(TextEditorViewReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     
@@ -77,13 +82,17 @@ struct RestaurantInfoComposeReducer: Reducer {
         case .appendImageDatas(let datas):
             let flatDatas = datas.compactMap { $0 }
             state.selectedImageDatas.append(contentsOf: flatDatas)
-            return .none
+            return .send(.setEnableNext)
         case .deselectPhoto(let data):
             state.selectedImageDatas = state.selectedImageDatas.filter { $0 != data }
-            return .none
+            return .send(.setEnableNext)
         case .setEnableNext:
+            let isValidMainTextMinCount = state.mainTextEditorViewState.minCount != nil
+            ? state.mainTextEditorViewState.txt.count >= state.mainTextEditorViewState.minCount!
+            : true
             let enable = state.selectedImageDatas.count >= 3 &&
-            state.titleTextFieldBarState.txt.isEmpty == false
+            state.titleTextFieldBarState.txt.isEmpty == false &&
+            isValidMainTextMinCount
             state.bottomButtonState.able = enable
             return .none
         case .navigaionBarAction(let action):
@@ -96,8 +105,13 @@ struct RestaurantInfoComposeReducer: Reducer {
             switch action {
             case .input(let txt):
                 state.titleTextFieldBarState.txt = txt
-                state.bottomButtonState.able = !txt.isEmpty
-                return .none
+                return .send(.setEnableNext)
+            }
+        case .mainTextEditorViewAction(let action):
+            switch action {
+            case .input(let txt):
+                state.mainTextEditorViewState.txt = txt
+                return .send(.setEnableNext)
             }
         case .bottomButtonAction(let action):
             switch action {

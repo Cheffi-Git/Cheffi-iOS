@@ -29,7 +29,7 @@ struct TextEditorView: View {
                     if viewStore.txt.isEmpty {
                         let atLeastMinCount = viewStore.minCount != nil ? " (최소 \(viewStore.minCount!)글자)" : ""
                         VStack {
-                            Text("음식의 맛, 양, 포장 상태 등 음식에 대한 솔직한 리뷰를 남겨주세요.\(atLeastMinCount)")
+                            Text("\(viewStore.placeHolder)\(atLeastMinCount)")
                                 .font(.custom("SUIT", size: 14))
                                 .foregroundColor(.cheffiGray5)
                             
@@ -78,7 +78,7 @@ struct TextEditorView_Preview: PreviewProvider {
         TextEditorView(
             Store(initialState: TextEditorViewReducer.State(
                 txt: "",
-                placeHolder: "도로명 주소 입력",
+                placeHolder: "음식의 맛, 양, 포장 상태 등 음식에 대한 솔직한 리뷰를 남겨주세요.",
                 minCount: 100
             )) {
                 TextEditorViewReducer()._printChanges()
