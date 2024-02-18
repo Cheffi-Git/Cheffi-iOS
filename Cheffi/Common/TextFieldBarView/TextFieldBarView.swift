@@ -30,7 +30,7 @@ struct TextFieldBarView: View {
                     text: viewStore.binding(get: \.txt, send: { .input($0) }),
                     prompt: Text(viewStore.placeHolder)
                 )
-                .font(Font.custom("SUIT", size: 14))
+                .font(.custom("SUIT", size: 14))
                 .foregroundColor(.cheffiGray9)
                 .focused($isFocused)
                 .onChange(of: viewStore.txt) {
