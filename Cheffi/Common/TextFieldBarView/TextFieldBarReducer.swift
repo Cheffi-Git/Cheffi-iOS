@@ -10,8 +10,19 @@ import ComposableArchitecture
 
 struct TextFieldBarReducer: Reducer {
     struct State: Equatable {
-        var txt: String = ""
+        var txt: String
         let placeHolder: String
+        let maxCount: Int?
+        
+        init(
+            txt: String = "",
+            placeHolder: String,
+            maxCount: Int? = nil
+        ) {
+            self.txt = txt
+            self.placeHolder = placeHolder
+            self.maxCount = maxCount
+        }
     }
 
     enum Action {

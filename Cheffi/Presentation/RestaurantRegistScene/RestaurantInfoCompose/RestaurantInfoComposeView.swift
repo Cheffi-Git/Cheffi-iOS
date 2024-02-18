@@ -16,6 +16,7 @@ struct RestaurantInfoComposeView: View {
         static let safeAreaPadding = 16.0
         static let headlineTextPadding = EdgeInsets(top: 32, leading: 0, bottom: 4, trailing: 0)
         static let headlineTextHorizontalSpacing = 8.0
+        static let smallHeadlineTextTopPadding = 8.0
         static let photoListTopPadding = 12.0
         static let photoThumbnailImageSize = CGSize(width: 88.0, height: 88.0)
         static let attatchPhotoButtonContentsSpacing = 4.0
@@ -127,17 +128,25 @@ struct RestaurantInfoComposeView: View {
                 
                 // 리뷰작성 영역
                 VStack(spacing: 0) {
+                    Text("제목")
+                        .font(Font.custom("SUIT", size: 14))
+                        .foregroundColor(.cheffiGray8)
+                        .padding(.top, Metrics.smallHeadlineTextTopPadding)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    TextFieldBarView(store.scope(
+                        state: \.titleTextFieldBarState,
+                        action: RestaurantInfoComposeReducer.Action.titleTextFieldBarAction
+                    ))
+                } // 리뷰작성 영역
+                
+                // 메뉴선택 영역
+                VStack(spacing: 0) {
                     Text("어떤 메뉴를 드셨나요?")
                         .font(.custom("SUIT", size: 20).weight(.semibold))
                         .foregroundColor(.cheffiGray8)
                         .padding(Metrics.headlineTextPadding)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                } // 리뷰작성 영역
-                
-                // 메뉴선택 영역
-                VStack(spacing: 0) {
-                    
                 } // 메뉴선택 영역
                 
                 Spacer()
@@ -174,7 +183,11 @@ struct RestaurantInfoComposeView_Preview: PreviewProvider {
                     UIImage(resource: .icArrowRight).pngData()!,
                     UIImage(resource: .loginBackground).pngData()!,
                     UIImage(resource: .icSearch).pngData()!
-                ]
+                ], 
+                titleTextFieldBarState: TextFieldBarReducer.State(
+                    placeHolder: "기사식당 맛있어요",
+                    maxCount: 30
+                )
             )) {
                 RestaurantInfoComposeReducer(
                     useCase: PreviewRestaurantRegistUseCase(),

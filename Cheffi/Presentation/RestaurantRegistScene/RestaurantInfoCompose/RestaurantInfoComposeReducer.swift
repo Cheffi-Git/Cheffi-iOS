@@ -30,6 +30,7 @@ struct RestaurantInfoComposeReducer: Reducer {
             title: "내 맛집 등록",
             buttonKind: .back
         )
+        var titleTextFieldBarState: TextFieldBarReducer.State
         var bottomButtonState = BottomButtonReducer.State(
             title: "다음",
             able: false
@@ -37,22 +38,18 @@ struct RestaurantInfoComposeReducer: Reducer {
     }
     
     enum Action {
-        case navigaionBarAction(NavigationBarReducer.Action)
         case startCamera
         case startAlbumSelection
         case appendImageDatas([Data?])
-        case bottomButtonAction(BottomButtonReducer.Action)
         case deselectPhoto(Data)
+        case setEnableNext
+        case navigaionBarAction(NavigationBarReducer.Action)
+        case titleTextFieldBarAction(TextFieldBarReducer.Action)
+        case bottomButtonAction(BottomButtonReducer.Action)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .navigaionBarAction(let action):
-            switch action {
-            case .tap:
-                steps.send(.popToNavigationController)
-                return .none
-            }
         case .startCamera:
             let stepAsync: () async -> Data? = {
                 await withCheckedContinuation { continuation in
@@ -84,6 +81,24 @@ struct RestaurantInfoComposeReducer: Reducer {
         case .deselectPhoto(let data):
             state.selectedImageDatas = state.selectedImageDatas.filter { $0 != data }
             return .none
+        case .setEnableNext:
+            let enable = state.selectedImageDatas.count >= 3 &&
+            state.titleTextFieldBarState.txt.isEmpty == false
+            state.bottomButtonState.able = enable
+            return .none
+        case .navigaionBarAction(let action):
+            switch action {
+            case .tap:
+                steps.send(.popToNavigationController)
+                return .none
+            }
+        case .titleTextFieldBarAction(let action):
+            switch action {
+            case .input(let txt):
+                state.titleTextFieldBarState.txt = txt
+                state.bottomButtonState.able = !txt.isEmpty
+                return .none
+            }
         case .bottomButtonAction(let action):
             switch action {
             case .tap:
