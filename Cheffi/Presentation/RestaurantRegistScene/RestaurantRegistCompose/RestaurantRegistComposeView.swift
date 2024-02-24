@@ -13,7 +13,7 @@ import ViewStore
 @ViewStore(RestaurantRegistComposeReducer.self)
 struct RestaurantRegistComposeView: View {
     private enum Metrics {
-        static let safeAreaPadding = 16.0
+        static let outsidePadding = 16.0
         static let headlineTextPadding = EdgeInsets(top: 32.0, leading: 0, bottom: 4.0, trailing: 0)
         static let titleTextTopPadding = 20.0
         static let dropDownPickerPadding = 8.0
@@ -83,7 +83,7 @@ struct RestaurantRegistComposeView: View {
                     action: RestaurantRegistComposeReducer.Action.bottomButtonAction
                 ))
             }
-            .padding(.horizontal, Metrics.safeAreaPadding)
+            .padding(.horizontal, Metrics.outsidePadding)
             
             if viewStore.isShowConfirmPopup {
                 ConfirmPopupView(store.scope(

@@ -13,6 +13,7 @@ import ViewStore
 struct BottomButtonView: View {
     private enum Metrics {
         static let buttonViewPadding = 16.0
+        static let overlayPositionOffsetSize = CGSize(width: 0, height: -buttonViewPadding)
         static let buttonPadding = 12.0
         static let buttonCornerRadius = 10.0
     }
@@ -30,14 +31,18 @@ struct BottomButtonView: View {
                     .cornerRadius(Metrics.buttonCornerRadius)
             }
         }
-        .padding(.vertical, Metrics.buttonViewPadding)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .cheffiWhite, .cheffiWhite]),
-                startPoint: .top,
-                endPoint: .center
-            )
-        )
+        .padding(.bottom, Metrics.buttonViewPadding)
+        .overlay {
+            GeometryReader { _ in
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .cheffiWhite]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: Metrics.buttonViewPadding)
+                .offset(Metrics.overlayPositionOffsetSize)
+            }
+        }
     }
 }
 
