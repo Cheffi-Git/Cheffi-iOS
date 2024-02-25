@@ -25,11 +25,11 @@ struct BottomButtonView: View {
                 Text(viewStore.title)
                     .frame(maxWidth: .infinity)
                     .padding(Metrics.buttonPadding)
-                    .disabled(!viewStore.able)
                     .foregroundColor(viewStore.able ? .cheffiWhite : .cheffiGray5)
                     .background(viewStore.able ? .mainCTA : .cheffiGray1)
                     .cornerRadius(Metrics.buttonCornerRadius)
             }
+            .disabled(!viewStore.able)
         }
         .padding(.bottom, Metrics.buttonViewPadding)
         .overlay {

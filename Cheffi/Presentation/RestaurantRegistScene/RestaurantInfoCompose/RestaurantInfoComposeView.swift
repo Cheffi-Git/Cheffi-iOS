@@ -25,8 +25,11 @@ struct RestaurantInfoComposeView: View {
         static let smallHeadlineTextTopPadding = 8.0
         static let mainTextEditorHeight = 192.0
         static let textFieldTopPadding = 8.0
-        static let menuAskingDescriptionTextTopPadding = EdgeInsets(top: 2, leading: 0, bottom: 6, trailing: 0)
+        static let menuAskingDescriptionTextPadding = EdgeInsets(top: 2, leading: 0, bottom: 6, trailing: 0)
         static let menuAskingBackgroundImagePadding = EdgeInsets(top: 56, leading: 0, bottom: 24, trailing: 0)
+        static let menuItemHStackSpacing = 12.0
+        static let menuItemHStackTopPadding = 16.0
+        static let menuAreaBottomPadding = 8.0
     }
     
     @State private var isShowAlertAction: Bool = false
@@ -170,42 +173,63 @@ struct RestaurantInfoComposeView: View {
                         Text("드신 메뉴와 가격을 알려주세요")
                             .font(.custom("SUIT", size: 14))
                             .foregroundColor(.cheffiGray6)
-                            .padding(Metrics.menuAskingDescriptionTextTopPadding)
+                            .padding(Metrics.menuAskingDescriptionTextPadding)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        VStack(spacing: 0) {
+                        if viewStore.composedMenus.isEmpty {
                             Image(.emptyMenuBackground)
                                 .padding(Metrics.menuAskingBackgroundImagePadding)
-                            
-                            Button {
-                                
-                            } label: {
-                                HStack(spacing: Metrics.attatchPhotoButtonContentsSpacing) {
-                                    // TODO: 분기 - 메뉴 항목 있을때
-//                                    Image(.iconPlus)
-                                    
-                                    // TODO: 분기 - 메뉴 항목 있을때
-                                    Text("메뉴 선택")
+                        } else {
+                            ForEach(viewStore.composedMenus, id: \.self) { menu in
+                                HStack(spacing: Metrics.menuItemHStackSpacing) {
+                                    Text(menu.name)
                                         .font(.custom("SUIT", size: 16).weight(.medium))
+                                        .foregroundColor(.cheffiGray9)
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(menu.price)")
+                                        .font(.custom("SUIT", size: 16).weight(.semibold))
+                                        .foregroundColor(.cheffiGray9)
+                                    
+                                    Button {
+                                        // TODO: delete menu item
+                                    } label: {
+                                        Image(.iconClose)
+                                    }
                                 }
-                                .padding(Metrics.attatchPhotoButtonPadding)
-                                .frame(maxWidth: .infinity)
+                                .padding(.top, Metrics.menuItemHStackTopPadding)
                             }
-                            .overlay(
-                                RoundedRectangle(cornerRadius: Metrics.attatchPhotoButtonCornerRadius)
-                                    .inset(by: 0.5)
-                                    .stroke(
-                                        // TODO: 분기 - 메뉴 항목 있을때
-                                        .cheffiPink1,
-                                        lineWidth: 1
-                                    )
-                            )
-                            .padding(.vertical, Metrics.attatchPhotoButtonViewPadding)
-                            // TODO: 분기 - 메뉴 항목 있을때
-                            .foregroundColor(.mainCTA)
+                            .animation(.snappy, value: viewStore.composedMenus.count)
                         }
+                        
+                        Button {
+                            viewStore.send(.tapMenuCompose)
+                        } label: {
+                            HStack(spacing: Metrics.attatchPhotoButtonContentsSpacing) {
+                                if viewStore.composedMenus.isEmpty == false {
+                                    Image(.iconPlus)
+                                }
+                                
+                                Text(viewStore.composedMenus.isEmpty ? "메뉴 선택" : "메뉴 추가하기")
+                                    .font(.custom("SUIT", size: 16).weight(.medium))
+                            }
+                            .padding(Metrics.attatchPhotoButtonPadding)
+                            .frame(maxWidth: .infinity)
+                        }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Metrics.attatchPhotoButtonCornerRadius)
+                                .inset(by: 0.5)
+                                .stroke(
+                                    viewStore.composedMenus.isEmpty ? .cheffiPink1 : .cheffiGray2,
+                                    lineWidth: 1
+                                )
+                        )
+                        .padding(.vertical, Metrics.attatchPhotoButtonViewPadding)
+                        .foregroundColor(viewStore.composedMenus.isEmpty ? .mainCTA : .cheffiGray7)
                     } // 메뉴선택 영역 끝
                     .padding(.horizontal, Metrics.outsidePadding)
+                    .padding(.bottom, viewStore.composedMenus.isEmpty ? 0 : Metrics.menuAreaBottomPadding)
                     
                     Spacer()
                 }
@@ -217,13 +241,15 @@ struct RestaurantInfoComposeView: View {
                 .padding(.horizontal, Metrics.outsidePadding)
             }
             
-            // 팝업
-//            ZStack {
-//                Color.cheffiDimmed
-//                
-//                
-//            }
+            //  메뉴 작성 팝업
+            if viewStore.isShowMenuComposePopup {
+                RestaurantMenuComposePopupView(store.scope(
+                    state: \.menuComposePopupState,
+                    action: RestaurantInfoComposeReducer.Action.menuComposePopupAction
+                ))
+            }
         }
+        .animation(.default, value: viewStore.isShowMenuComposePopup)
     }
 }
 
@@ -253,7 +279,8 @@ struct RestaurantInfoComposeView_Preview: PreviewProvider {
                 titleTextFieldBarState: TextFieldBarReducer.State(
                     placeHolder: "기사식당 맛있어요",
                     maxCount: 30
-                )
+                ),
+                isShowMenuComposePopup: false
             )) {
                 RestaurantInfoComposeReducer(
                     useCase: PreviewRestaurantRegistUseCase(),

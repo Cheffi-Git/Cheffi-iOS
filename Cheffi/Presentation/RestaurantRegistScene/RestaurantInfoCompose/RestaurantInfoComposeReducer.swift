@@ -10,6 +10,10 @@ import Combine
 import ComposableArchitecture
 
 struct RestaurantInfoComposeReducer: Reducer {
+    private enum Policy {
+        static let maxMenuCount = 5
+    }
+    
     let useCase: RestaurantUseCase
     let steps: PassthroughSubject<RouteStep, Never>
 
@@ -35,6 +39,10 @@ struct RestaurantInfoComposeReducer: Reducer {
             placeHolder: "음식의 맛, 양, 포장 상태 등 음식에 대한 솔직한 리뷰를 남겨주세요.",
             minCount: 100
         )
+        var isShowMenuComposePopup: Bool = false
+        var isShowMaxMenuConfirmPopup: Bool = false
+        var menuComposePopupState = RestaurantMenuComposePopupReducer.State()
+        var composedMenus: [MenuDTO] = []
         var bottomButtonState = BottomButtonReducer.State(
             title: "다음",
             able: false
@@ -50,6 +58,8 @@ struct RestaurantInfoComposeReducer: Reducer {
         case navigaionBarAction(NavigationBarReducer.Action)
         case titleTextFieldBarAction(TextFieldBarReducer.Action)
         case mainTextEditorViewAction(TextEditorViewReducer.Action)
+        case tapMenuCompose
+        case menuComposePopupAction(RestaurantMenuComposePopupReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     
@@ -112,6 +122,44 @@ struct RestaurantInfoComposeReducer: Reducer {
             case .input(let txt):
                 state.mainTextEditorViewState.txt = txt
                 return .send(.setEnableNext)
+            }
+        case .tapMenuCompose:
+            guard state.composedMenus.count < Policy.maxMenuCount else {
+                state.isShowMaxMenuConfirmPopup = true
+                return .none
+            }
+            state.menuComposePopupState = RestaurantMenuComposePopupReducer.State()
+            state.isShowMenuComposePopup = true
+            return .none
+        case .menuComposePopupAction(let action):
+            switch action {
+            case .menuNameTextFieldAction(let action):
+                switch action {
+                case .input(let txt):
+                    state.menuComposePopupState.menuNameTextFieldState.txt = txt
+                    return .send(.menuComposePopupAction(.setEnableNext))
+                }
+            case .menuPriceTextFieldAction(let action):
+                switch action {
+                case .input(let txt):
+                    state.menuComposePopupState.menuPriceTextFieldState.txt = txt
+                    return .send(.menuComposePopupAction(.setEnableNext))
+                }
+            case .setEnableNext:
+                let enableNext = state.menuComposePopupState.menuNameTextFieldState.txt.isEmpty == false &&
+                state.menuComposePopupState.menuPriceTextFieldState.txt.isEmpty == false
+                state.menuComposePopupState.tappable = enableNext
+                return .none
+            case .tap:
+                state.isShowMenuComposePopup = false
+                let menu = MenuDTO(
+                    name: state.menuComposePopupState.menuNameTextFieldState.txt,
+                    // TODO: menuPriceTextFieldState.txt 를 Int 타입으로 변경
+                    price: Int(state.menuComposePopupState.menuPriceTextFieldState.txt) ?? 0,
+                    description: nil
+                )
+                state.composedMenus.append(menu)
+                return .none
             }
         case .bottomButtonAction(let action):
             switch action {

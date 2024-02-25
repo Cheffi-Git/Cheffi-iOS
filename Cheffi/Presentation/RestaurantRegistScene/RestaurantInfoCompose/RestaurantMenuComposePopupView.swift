@@ -51,11 +51,11 @@ struct RestaurantMenuComposePopupView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(Metrics.buttonLabelPadding)
                                 .font(.custom("SUIT", size: 16).weight(.medium))
-                                .disabled(!viewStore.tappable)
                                 .foregroundColor(viewStore.tappable ? .cheffiWhite : .cheffiGray5)
                                 .background(viewStore.tappable ? .mainCTA : .cheffiGray1)
                                 .cornerRadius(Metrics.buttonLabelCornerRadius)
                         }
+                        .disabled(!viewStore.tappable)
                         .padding(.top, Metrics.buttonTopPadding)
                     }
                     .frame(maxWidth: .infinity)

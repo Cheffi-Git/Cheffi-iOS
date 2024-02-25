@@ -21,10 +21,31 @@ struct RestaurantMenuComposePopupReducer: Reducer {
     enum Action {
         case menuNameTextFieldAction(TextFieldBarReducer.Action)
         case menuPriceTextFieldAction(TextFieldBarReducer.Action)
+        case setEnableNext
         case tap
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        .none
+        switch action {
+        case .menuNameTextFieldAction(let action):
+            switch action {
+            case .input(let txt):
+                state.menuNameTextFieldState.txt = txt
+                return .send(.setEnableNext)
+            }
+        case .menuPriceTextFieldAction(let action):
+            switch action {
+            case .input(let txt):
+                state.menuPriceTextFieldState.txt = txt
+                return .send(.setEnableNext)
+            }
+        case .setEnableNext:
+            let enableNext = state.menuNameTextFieldState.txt.isEmpty == false &&
+            state.menuPriceTextFieldState.txt.isEmpty == false
+            state.tappable = enableNext
+            return .none
+        case .tap:
+            return .none
+        }
     }
 }
