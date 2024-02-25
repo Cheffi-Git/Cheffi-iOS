@@ -13,7 +13,8 @@ struct RestaurantMenuComposePopupReducer: Reducer {
         var menuNameTextFieldState = TextFieldBarReducer.State(placeHolder: "메뉴명")
         var menuPriceTextFieldState = TextFieldBarReducer.State(
             placeHolder: "가격",
-            rightText: "원"
+            rightText: "원",
+            isNumberOnly: true
         )
         var tappable: Bool = false
     }
@@ -37,6 +38,13 @@ struct RestaurantMenuComposePopupReducer: Reducer {
             switch action {
             case .input(let txt):
                 state.menuPriceTextFieldState.txt = txt
+                if state.menuPriceTextFieldState.isNumberOnly {
+                    let numberFormatter: NumberFormatter = NumberFormatter()
+                    numberFormatter.numberStyle = .decimal
+                    if let formattedNumber = numberFormatter.number(from: txt) {
+                        state.menuPriceTextFieldState.textNumber = Int(truncating: formattedNumber)
+                    }
+                }
                 return .send(.setEnableNext)
             }
         case .setEnableNext:

@@ -147,6 +147,13 @@ struct RestaurantInfoComposeReducer: Reducer {
                 switch action {
                 case .input(let txt):
                     state.menuComposePopupState.menuPriceTextFieldState.txt = txt
+                    if state.menuComposePopupState.menuPriceTextFieldState.isNumberOnly {
+                        let numberFormatter: NumberFormatter = NumberFormatter()
+                        numberFormatter.numberStyle = .decimal
+                        if let formattedNumber = numberFormatter.number(from: txt) {
+                            state.menuComposePopupState.menuPriceTextFieldState.textNumber = Int(truncating: formattedNumber)
+                        }
+                    }
                     return .send(.menuComposePopupAction(.setEnableNext))
                 }
             case .setEnableNext:
@@ -158,8 +165,7 @@ struct RestaurantInfoComposeReducer: Reducer {
                 state.isShowMenuComposePopup = false
                 let menu = MenuDTO(
                     name: state.menuComposePopupState.menuNameTextFieldState.txt,
-                    // TODO: menuPriceTextFieldState.txt 를 Int 타입으로 변경
-                    price: Int(state.menuComposePopupState.menuPriceTextFieldState.txt) ?? 0,
+                    price: state.menuComposePopupState.menuPriceTextFieldState.textNumber ?? 0,
                     description: nil
                 )
                 state.composedMenus.append(menu)

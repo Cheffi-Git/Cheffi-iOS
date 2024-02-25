@@ -188,7 +188,7 @@ struct RestaurantInfoComposeView: View {
                                     
                                     Spacer()
                                     
-                                    Text("\(menu.price)")
+                                    Text("\(menu.price)원")
                                         .font(.custom("SUIT", size: 16).weight(.semibold))
                                         .foregroundColor(.cheffiGray9)
                                     

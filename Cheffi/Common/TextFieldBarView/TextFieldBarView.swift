@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import ComposableArchitecture
 import ViewStore
 
@@ -29,9 +30,20 @@ struct TextFieldBarView: View {
                 text: viewStore.binding(get: \.txt, send: { .input($0) }),
                 prompt: Text(viewStore.placeHolder)
             )
+            .keyboardType(viewStore.isNumberOnly ? .numberPad : .default)
+            
             .font(.custom("SUIT", size: 14))
             .foregroundColor(.cheffiGray9)
             .focused($isFocused)
+            .onReceive(Just(viewStore.txt)) { newValue in
+                guard viewStore.isNumberOnly else { return }
+                let filteredText = newValue.filter { "0123456789".contains($0) }
+                let numberFormatter: NumberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                if let formattedText = numberFormatter.string(for: Int(filteredText)) {
+                    viewStore.send(.input(formattedText))
+                }
+            }
             .onChange(of: viewStore.txt) {
                 if let maxCount = viewStore.maxCount {
                     viewStore.send(.input(String(viewStore.txt.prefix(maxCount))))
@@ -70,8 +82,9 @@ struct TextFieldBarView_Preview: PreviewProvider {
             Store(initialState: TextFieldBarReducer.State(
                 txt: "",
                 placeHolder: "도로명 주소 입력",
-                rightText: "원"
-//                maxCount: 30
+                rightText: "원",
+                maxCount: 30,
+                isNumberOnly: true
             )) {
                 TextFieldBarReducer()._printChanges()
             }
