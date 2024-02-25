@@ -12,15 +12,18 @@ struct TextFieldBarReducer: Reducer {
     struct State: Equatable {
         var txt: String
         let placeHolder: String
+        let rightText: String?
         let maxCount: Int?
         
         init(
             txt: String = "",
             placeHolder: String,
+            rightText: String? = nil,
             maxCount: Int? = nil
         ) {
             self.txt = txt
             self.placeHolder = placeHolder
+            self.rightText = rightText
             self.maxCount = maxCount
         }
     }

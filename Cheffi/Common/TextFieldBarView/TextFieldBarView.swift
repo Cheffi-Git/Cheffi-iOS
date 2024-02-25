@@ -24,40 +24,43 @@ struct TextFieldBarView: View {
     
     var body: some View {
         HStack {
-            HStack {
-                TextField(
-                    "",
-                    text: viewStore.binding(get: \.txt, send: { .input($0) }),
-                    prompt: Text(viewStore.placeHolder)
-                )
-                .font(.custom("SUIT", size: 14))
-                .foregroundColor(.cheffiGray9)
-                .focused($isFocused)
-                .onChange(of: viewStore.txt) {
-                    if let maxCount = viewStore.maxCount {
-                        viewStore.send(.input(String(viewStore.txt.prefix(maxCount))))
-                    }
-                }
-                
+            TextField(
+                "",
+                text: viewStore.binding(get: \.txt, send: { .input($0) }),
+                prompt: Text(viewStore.placeHolder)
+            )
+            .font(.custom("SUIT", size: 14))
+            .foregroundColor(.cheffiGray9)
+            .focused($isFocused)
+            .onChange(of: viewStore.txt) {
                 if let maxCount = viewStore.maxCount {
-                    Text("\(viewStore.txt.count)/\(maxCount)")
-                        .font(.custom("SUIT", size: 14))
-                        .foregroundColor(.cheffiGray5)
+                    viewStore.send(.input(String(viewStore.txt.prefix(maxCount))))
                 }
             }
-            .padding(Metrics.barPadding)
-            .background(.cheffiWhite)
-            .overlay(
-                RoundedRectangle(cornerRadius: Metrics.barCornerRadius)
-                    .inset(by: Metrics.barBorderInset)
-                    .stroke(
-                        isFocused ? .cheffiGray9 : .cheffiGray3,
-                        lineWidth: Metrics.barBorderWidth
-                    )
-            )
-            .frame(height: Metrics.barHeight)
+            
+            if let rightText = viewStore.rightText {
+                Text(rightText)
+                    .font(.custom("SUIT", size: 14).weight(.medium))
+                    .foregroundColor(.cheffiGray9)
+            }
+            
+            if let maxCount = viewStore.maxCount {
+                Text("\(viewStore.txt.count)/\(maxCount)")
+                    .font(.custom("SUIT", size: 14))
+                    .foregroundColor(.cheffiGray5)
+            }
         }
-        .padding(.top, Metrics.outerHStackPadding)
+        .padding(Metrics.barPadding)
+        .background(.cheffiWhite)
+        .overlay(
+            RoundedRectangle(cornerRadius: Metrics.barCornerRadius)
+                .inset(by: Metrics.barBorderInset)
+                .stroke(
+                    isFocused ? .cheffiGray9 : .cheffiGray3,
+                    lineWidth: Metrics.barBorderWidth
+                )
+        )
+        .frame(height: Metrics.barHeight)
     }
 }
 
@@ -67,7 +70,8 @@ struct TextFieldBarView_Preview: PreviewProvider {
             Store(initialState: TextFieldBarReducer.State(
                 txt: "",
                 placeHolder: "도로명 주소 입력",
-                maxCount: 30
+                rightText: "원"
+//                maxCount: 30
             )) {
                 TextFieldBarReducer()._printChanges()
             }

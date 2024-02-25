@@ -19,6 +19,7 @@ struct RestaurantRegistComposeView: View {
         static let dropDownPickerPadding = 8.0
         static let dropDownPickerHStackHeight = 48.0
         static let dropDownPickerSpacing = 9.0
+        static let textFieldTopPadding = 8.0
     }
     
     var body: some View {
@@ -64,6 +65,7 @@ struct RestaurantRegistComposeView: View {
                     state: \.roadNameAddressTextFieldBarState,
                     action: RestaurantRegistComposeReducer.Action.roadNameAddressTextFieldBarAction
                 ))
+                .padding(.top, Metrics.textFieldTopPadding)
                 
                 Text("식당이름")
                     .font(.custom("SUIT", size: 14).weight(.bold))
@@ -75,6 +77,7 @@ struct RestaurantRegistComposeView: View {
                     state: \.restaurantNameTextFieldBarState,
                     action: RestaurantRegistComposeReducer.Action.restaurantNameTextFieldBarAction
                 ))
+                .padding(.top, Metrics.textFieldTopPadding)
                 
                 Spacer()
                 

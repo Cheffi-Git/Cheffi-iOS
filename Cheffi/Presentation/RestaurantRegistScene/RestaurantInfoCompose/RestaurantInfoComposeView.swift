@@ -24,6 +24,7 @@ struct RestaurantInfoComposeView: View {
         static let attatchPhotoButtonCornerRadius = 8.0
         static let smallHeadlineTextTopPadding = 8.0
         static let mainTextEditorHeight = 192.0
+        static let textFieldTopPadding = 8.0
         static let menuAskingDescriptionTextTopPadding = EdgeInsets(top: 2, leading: 0, bottom: 6, trailing: 0)
         static let menuAskingBackgroundImagePadding = EdgeInsets(top: 56, leading: 0, bottom: 24, trailing: 0)
     }
@@ -141,6 +142,7 @@ struct RestaurantInfoComposeView: View {
                             state: \.titleTextFieldBarState,
                             action: RestaurantInfoComposeReducer.Action.titleTextFieldBarAction
                         ))
+                        .padding(.top, Metrics.textFieldTopPadding)
                         
                         TextEditorView(store.scope(
                             state: \.mainTextEditorViewState,
@@ -216,6 +218,11 @@ struct RestaurantInfoComposeView: View {
             }
             
             // 팝업
+//            ZStack {
+//                Color.cheffiDimmed
+//                
+//                
+//            }
         }
     }
 }
