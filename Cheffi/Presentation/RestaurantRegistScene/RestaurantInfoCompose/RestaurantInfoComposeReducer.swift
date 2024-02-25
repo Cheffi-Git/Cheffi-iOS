@@ -59,6 +59,7 @@ struct RestaurantInfoComposeReducer: Reducer {
         case titleTextFieldBarAction(TextFieldBarReducer.Action)
         case mainTextEditorViewAction(TextEditorViewReducer.Action)
         case tapMenuCompose
+        case deleteMenuItem(MenuDTO)
         case menuComposePopupAction(RestaurantMenuComposePopupReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
@@ -130,6 +131,9 @@ struct RestaurantInfoComposeReducer: Reducer {
             }
             state.menuComposePopupState = RestaurantMenuComposePopupReducer.State()
             state.isShowMenuComposePopup = true
+            return .none
+        case .deleteMenuItem(let menu):
+            state.composedMenus = state.composedMenus.filter { $0 != menu }
             return .none
         case .menuComposePopupAction(let action):
             switch action {

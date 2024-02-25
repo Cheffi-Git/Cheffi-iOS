@@ -193,7 +193,7 @@ struct RestaurantInfoComposeView: View {
                                         .foregroundColor(.cheffiGray9)
                                     
                                     Button {
-                                        // TODO: delete menu item
+                                        viewStore.send(.deleteMenuItem(menu))
                                     } label: {
                                         Image(.iconClose)
                                     }
