@@ -24,6 +24,7 @@ struct RestaurantMenuComposePopupView: View {
     var body: some View {
         ZStack {
             Color.cheffiDimmed
+                .ignoresSafeArea()
             
             GeometryReader {
                 VStack(spacing: Metrics.popupVStackSpacing) {
@@ -67,7 +68,6 @@ struct RestaurantMenuComposePopupView: View {
                 .frame(width: $0.size.width, height: $0.size.height)
             }
         }
-        .ignoresSafeArea()
     }
 }
 

@@ -200,7 +200,6 @@ struct RestaurantInfoComposeView: View {
                                 }
                                 .padding(.top, Metrics.menuItemHStackTopPadding)
                             }
-                            .animation(.snappy, value: viewStore.composedMenus.count)
                         }
                         
                         Button {
@@ -230,9 +229,11 @@ struct RestaurantInfoComposeView: View {
                     } // 메뉴선택 영역 끝
                     .padding(.horizontal, Metrics.outsidePadding)
                     .padding(.bottom, viewStore.composedMenus.isEmpty ? 0 : Metrics.menuAreaBottomPadding)
+                    .animation(.snappy, value: viewStore.composedMenus)
                     
                     Spacer()
                 }
+                .scrollDismissesKeyboard(.immediately)
                 
                 BottomButtonView(store.scope(
                     state: \.bottomButtonState,
@@ -248,8 +249,17 @@ struct RestaurantInfoComposeView: View {
                     action: RestaurantInfoComposeReducer.Action.menuComposePopupAction
                 ))
             }
+            
+            // 메뉴 최대갯수 확인 팝업
+            if viewStore.isShowMaxMenuConfirmPopup {
+                ConfirmPopupView(store.scope(
+                    state: \.maxMenuConfirmPopupState,
+                    action: RestaurantInfoComposeReducer.Action.maxMenuConfirmPopupAction
+                ))
+            }
         }
         .animation(.default, value: viewStore.isShowMenuComposePopup)
+        .animation(.default, value: viewStore.isShowMaxMenuConfirmPopup)
     }
 }
 

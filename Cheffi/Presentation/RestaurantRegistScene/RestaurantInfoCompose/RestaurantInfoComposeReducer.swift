@@ -42,6 +42,11 @@ struct RestaurantInfoComposeReducer: Reducer {
         var isShowMenuComposePopup: Bool = false
         var isShowMaxMenuConfirmPopup: Bool = false
         var menuComposePopupState = RestaurantMenuComposePopupReducer.State()
+        var maxMenuConfirmPopupState = ConfirmPopupReducer.State(
+            title: "메뉴는 최대 5개까지 등록할 수 있어요",
+            description: "꼭 정확한 정보를 입력해주세요",
+            primaryButtonTitle: "이해했어요"
+        )
         var composedMenus: [MenuDTO] = []
         var bottomButtonState = BottomButtonReducer.State(
             title: "다음",
@@ -61,6 +66,7 @@ struct RestaurantInfoComposeReducer: Reducer {
         case tapMenuCompose
         case deleteMenuItem(MenuDTO)
         case menuComposePopupAction(RestaurantMenuComposePopupReducer.Action)
+        case maxMenuConfirmPopupAction(ConfirmPopupReducer.Action)
         case bottomButtonAction(BottomButtonReducer.Action)
     }
     
@@ -103,7 +109,8 @@ struct RestaurantInfoComposeReducer: Reducer {
             : true
             let enable = state.selectedImageDatas.count >= 3 &&
             state.titleTextFieldBarState.txt.isEmpty == false &&
-            isValidMainTextMinCount
+            isValidMainTextMinCount &&
+            state.composedMenus.isEmpty == false
             state.bottomButtonState.able = enable
             return .none
         case .navigaionBarAction(let action):
@@ -134,7 +141,7 @@ struct RestaurantInfoComposeReducer: Reducer {
             return .none
         case .deleteMenuItem(let menu):
             state.composedMenus = state.composedMenus.filter { $0 != menu }
-            return .none
+            return .send(.setEnableNext)
         case .menuComposePopupAction(let action):
             switch action {
             case .menuNameTextFieldAction(let action):
@@ -169,8 +176,11 @@ struct RestaurantInfoComposeReducer: Reducer {
                     description: nil
                 )
                 state.composedMenus.append(menu)
-                return .none
+                return .send(.setEnableNext)
             }
+        case .maxMenuConfirmPopupAction:
+            state.isShowMaxMenuConfirmPopup = false
+            return .none
         case .bottomButtonAction(let action):
             switch action {
             case .tap:

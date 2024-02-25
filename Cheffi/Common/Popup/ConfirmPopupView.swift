@@ -24,6 +24,7 @@ struct ConfirmPopupView: View {
     var body: some View {
         ZStack {
             Color.cheffiDimmed
+                .ignoresSafeArea()
             
             GeometryReader {
                 VStack(spacing: Metrics.popupVStackSpacing) {
@@ -88,7 +89,6 @@ struct ConfirmPopupView: View {
                 .frame(width: $0.size.width, height: $0.size.height)
             }
         }
-        .ignoresSafeArea()
     }
 }
 
