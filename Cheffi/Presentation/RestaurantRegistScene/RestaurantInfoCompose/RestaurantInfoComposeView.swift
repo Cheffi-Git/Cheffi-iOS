@@ -286,11 +286,11 @@ struct RestaurantInfoComposeView_Preview: PreviewProvider {
                     UIImage(resource: .loginBackground).pngData()!,
                     UIImage(resource: .icSearch).pngData()!
                 ], 
+                isShowMenuComposePopup: false, 
                 titleTextFieldBarState: TextFieldBarReducer.State(
                     placeHolder: "기사식당 맛있어요",
                     maxCount: 30
-                ),
-                isShowMenuComposePopup: false
+                )
             )) {
                 RestaurantInfoComposeReducer(
                     useCase: PreviewRestaurantRegistUseCase(),
