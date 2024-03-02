@@ -67,7 +67,7 @@ struct RestaurantRegistComposeReducer: Reducer {
     }
     
     enum Action {
-        case navigaionBarAction(NavigationBarReducer.Action)
+        case navigationBarAction(NavigationBarReducer.Action)
         case provinceDropDownPickerAction(DropDownPickerReducer.Action)
         case cityDropDownPickerAction(DropDownPickerReducer.Action)
         case roadNameAddressTextFieldBarAction(TextFieldBarReducer.Action)
@@ -82,7 +82,7 @@ struct RestaurantRegistComposeReducer: Reducer {
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
-        case .navigaionBarAction(let action):
+        case .navigationBarAction(let action):
             switch action {
             case .tap:
                 steps.send(.popToNavigationController)

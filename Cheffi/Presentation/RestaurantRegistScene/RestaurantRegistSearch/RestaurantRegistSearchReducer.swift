@@ -52,7 +52,7 @@ struct RestaurantRegistSearchReducer: Reducer {
         case getRestaurants([RestaurantInfoDTO])
         case occerError(DataTransferError)
         
-        case navigaionBarAction(NavigationBarReducer.Action)
+        case navigationBarAction(NavigationBarReducer.Action)
         case searchBarAction(SearchBarReducer.Action)
         case nearRestaurantListAction(NearRestaurantListReducer.Action)
         case nearRestaurantEmptyAction(EmptyDescriptionViewReducer.Action)
@@ -80,7 +80,7 @@ struct RestaurantRegistSearchReducer: Reducer {
         case .occerError(let error):
             state.error = error.localizedDescription
             return .none
-        case .navigaionBarAction(let action):
+        case .navigationBarAction(let action):
             switch action {
             case .tap:
                 steps.send(.dismissRestaurantRegist)

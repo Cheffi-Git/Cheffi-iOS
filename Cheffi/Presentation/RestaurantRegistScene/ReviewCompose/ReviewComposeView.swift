@@ -39,7 +39,7 @@ struct ReviewComposeView: View {
             VStack(spacing: 0) {
                 NavigationBarView(store.scope(
                     state: \.navigationBarState,
-                    action: ReviewComposeReducer.Action.navigaionBarAction
+                    action: ReviewComposeReducer.Action.navigationBarAction
                 ))
                 
                 ScrollView(.vertical) {

@@ -65,7 +65,7 @@ struct ReviewComposeReducer: Reducer {
         
         case setEnableNext
         
-        case navigaionBarAction(NavigationBarReducer.Action)
+        case navigationBarAction(NavigationBarReducer.Action)
         case titleTextFieldBarAction(TextFieldBarReducer.Action)
         case mainTextEditorViewAction(TextEditorViewReducer.Action)
         case menuComposePopupAction(RestaurantMenuComposePopupReducer.Action)
@@ -127,7 +127,7 @@ struct ReviewComposeReducer: Reducer {
             state.composedMenus.isEmpty == false
             state.bottomButtonState.able = enable
             return .none
-        case .navigaionBarAction(let action):
+        case .navigationBarAction(let action):
             switch action {
             case .tap:
                 steps.send(.popToNavigationController)

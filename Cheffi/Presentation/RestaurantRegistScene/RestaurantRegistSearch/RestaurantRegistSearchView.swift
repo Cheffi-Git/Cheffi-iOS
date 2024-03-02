@@ -24,7 +24,7 @@ struct RestaurantRegistSearchView: View {
         VStack {
             NavigationBarView(store.scope(
                 state: \.navigationBarState,
-                action: RestaurantRegistSearchReducer.Action.navigaionBarAction
+                action: RestaurantRegistSearchReducer.Action.navigationBarAction
             ))
             
             SearchBarView(store.scope(
