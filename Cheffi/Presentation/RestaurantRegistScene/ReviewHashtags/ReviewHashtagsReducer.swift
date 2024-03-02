@@ -24,15 +24,46 @@ struct ReviewHashtagsReducer: Reducer {
     struct State: Equatable {
         var reviewRequestInfo: ReviewHashtagsActionType
         
+        var allTags: [TagDTO] = []
+        
         var navigationBarState: NavigationBarReducer.State
     }
     
     enum Action {
+        case onAppear
+        
         case navigationBarAction(NavigationBarReducer.Action)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
+        case .onAppear:
+            // TODO: API call - get all tags
+            let allTags = [
+                TagDTO(id: 0, type: .food, name: "한식"),
+                TagDTO(id: 1, type: .food, name: "일식"),
+                TagDTO(id: 2, type: .food, name: "중식"),
+                TagDTO(id: 3, type: .food, name: "샐러드"),
+                TagDTO(id: 4, type: .food, name: "해산물"),
+                TagDTO(id: 5, type: .food, name: "빵집"),
+                TagDTO(id: 6, type: .food, name: "분식"),
+                TagDTO(id: 7, type: .food, name: "면/국수"),
+                TagDTO(id: 8, type: .food, name: "돈까스"),
+                TagDTO(id: 9, type: .food, name: "피자"),
+                TagDTO(id: 10, type: .food, name: "치킨"),
+                TagDTO(id: 10, type: .taste, name: "매콤한"),
+                TagDTO(id: 12, type: .taste, name: "자극적인"),
+                TagDTO(id: 13, type: .taste, name: "달콤한"),
+                TagDTO(id: 14, type: .taste, name: "시원한"),
+                TagDTO(id: 15, type: .taste, name: "깔끔한"),
+                TagDTO(id: 16, type: .taste, name: "깊은맛"),
+                TagDTO(id: 17, type: .taste, name: "감성적인"),
+                TagDTO(id: 18, type: .taste, name: "사진맛집"),
+                TagDTO(id: 19, type: .taste, name: "혼술"),
+                TagDTO(id: 20, type: .taste, name: "혼밥")
+            ]
+            state.allTags = allTags
+            return .none
         case .navigationBarAction(let action):
             switch action {
             case .leftButtonTapped:

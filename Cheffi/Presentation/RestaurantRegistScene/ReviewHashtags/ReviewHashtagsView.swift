@@ -41,13 +41,13 @@ struct ReviewHashtagsView: View {
                     .padding(Metrics.sectionTitlePadding)
                 
                 FlexibleTagListView(
-                    data: [
-                        "Here’s", "to", "the", "crazy", "ones", "the", "misfits"
-                    ],
+                    data: viewStore.allTags.filter { $0.type == .food },
                     spacing: Metrics.tagSpacing,
                     alignment: .leading
                 ) { item in
-                    Text(verbatim: item)
+                    Text(verbatim: item.name)
+                        .font(.custom("SUIT", size: 15).weight(.medium))
+                        .foregroundColor(.cheffiGray8)
                         .padding(Metrics.tagItemPadding)
                         .background(
                             RoundedRectangle(cornerRadius: 1000)
@@ -62,7 +62,27 @@ struct ReviewHashtagsView: View {
                     .foregroundColor(.cheffiGray6)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(Metrics.sectionTitlePadding)
+                
+                FlexibleTagListView(
+                    data: viewStore.allTags.filter { $0.type == .taste },
+                    spacing: Metrics.tagSpacing,
+                    alignment: .leading
+                ) { item in
+                    Text(verbatim: item.name)
+                        .font(.custom("SUIT", size: 15).weight(.medium))
+                        .foregroundColor(.cheffiGray8)
+                        .padding(Metrics.tagItemPadding)
+                        .background(
+                            RoundedRectangle(cornerRadius: 1000)
+                                .inset(by: 0.5)
+                                .stroke(.cheffiGray2, lineWidth: 1)
+                        )
+                }
+                .padding(Metrics.tagListPadding)
             }
+        }
+        .onAppear {
+            viewStore.send(.onAppear)
         }
     }
 }
