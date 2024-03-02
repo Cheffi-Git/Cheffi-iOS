@@ -63,17 +63,21 @@ final class RestaurantRegistSceneDIContainer: RestaurantRegistFlowCoordinatorDep
             steps: steps
         )
     }
-
-    // MARK: - Popup
-    func makePopupViewController(text: String, subText: String, keyword: String, popupState: PopupState, leftButtonTitle: String, rightButtonTitle: String, leftHandler: (() -> Void)?, rightHandler: (() -> Void)?) -> PopupViewController {
-        return PopupViewController.instance(text: text,
-                                            subText: subText,
-                                            keyword: keyword,
-                                            popupState: popupState,
-                                            leftButtonTitle: leftButtonTitle,
-                                            rightButtonTitle: rightButtonTitle,
-                                            leftHandler: leftHandler,
-                                            rightHandler: rightHandler)
+    
+    // MARK: - Review Hashtags
+    func makeReviewHashtagsViewController(
+        reducer: ReviewHashtagsReducer,
+        composedReviewInfo: RegisterReviewRequest
+    ) -> ReviewHashtagsViewController {
+        ReviewHashtagsViewController(reducer: reducer, composedReviewInfo: composedReviewInfo)
+    }
+    
+    func makeReviewHashtagsReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewHashtagsReducer {
+        let repository = makeRestaurantRepository()
+        return ReviewHashtagsReducer(
+            useCase: makeRestaurantUseCase(repository: repository),
+            steps: steps
+        )
     }
 }
 

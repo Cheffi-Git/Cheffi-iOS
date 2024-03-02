@@ -18,6 +18,7 @@ class ReviewComposeViewController: UIViewController {
     ) {
         self.reducer = reducer
         self.restaurant = restaurant
+        
         super.init(nibName: nil, bundle: nil)
     }
     

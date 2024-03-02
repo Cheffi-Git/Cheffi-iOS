@@ -187,7 +187,7 @@ struct ReviewComposeReducer: Reducer {
         case .bottomButtonAction(let action):
             switch action {
             case .tap:
-                let composedRestaurantInfo = RegisterReviewRequest(
+                let composedReviewInfo = RegisterReviewRequest(
                     restaurantId: state.restaurant.id,
                     registered: state.restaurant.registered,
                     title: state.titleTextFieldBarState.txt,
@@ -195,7 +195,7 @@ struct ReviewComposeReducer: Reducer {
                     menus: state.composedMenus,
                     tag: TagsChangeRequest(foodTags: [], tasteTags: [])
                 )
-                steps.send(.pushRestaurantInfoHashtags(composedRestaurantInfo))
+                steps.send(.pushReviewHashtags(composedReviewInfo))
                 return .none
             }
         }
