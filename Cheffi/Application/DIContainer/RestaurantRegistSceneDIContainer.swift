@@ -26,13 +26,13 @@ final class RestaurantRegistSceneDIContainer: RestaurantRegistFlowCoordinatorDep
     }
     
     // MARK: - Restaurant Regist Search
-    func makeRestaurantRegistViewController(reducer: RestaurantRegistReducer) -> RestaurantRegistViewController {
-        return RestaurantRegistViewController.instance(reducer: reducer)
+    func makeRestaurantRegistSearchViewController(reducer: RestaurantRegistSearchReducer) -> RestaurantRegistSearchViewController {
+        return RestaurantRegistSearchViewController.instance(reducer: reducer)
     }
 
-    func makeRestaurantRegistReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantRegistReducer {
+    func makeRestaurantRegistSearchReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantRegistSearchReducer {
         let repository = makeRestaurantRepository()
-        return RestaurantRegistReducer(useCase: makeRestaurantUseCase(repository: repository), steps: steps)
+        return RestaurantRegistSearchReducer(useCase: makeRestaurantUseCase(repository: repository), steps: steps)
     }
     
     // MARK: - Restaurant Regist Compose
@@ -48,17 +48,17 @@ final class RestaurantRegistSceneDIContainer: RestaurantRegistFlowCoordinatorDep
         )
     }
     
-    // MARK: - Restaurant Info Compose
-    func makeRestaurantInfoComposeViewController(
-        reducer: RestaurantInfoComposeReducer,
+    // MARK: - Review Compose
+    func makeReviewComposeViewController(
+        reducer: ReviewComposeReducer,
         restaurant: RestaurantInfoDTO
-    ) -> RestaurantInfoComposeViewController {
-        return RestaurantInfoComposeViewController(reducer: reducer, restaurant: restaurant)
+    ) -> ReviewComposeViewController {
+        return ReviewComposeViewController(reducer: reducer, restaurant: restaurant)
     }
     
-    func makeRestaurantInfoComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantInfoComposeReducer {
+    func makeReviewComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewComposeReducer {
         let repository = makeRestaurantRepository()
-        return RestaurantInfoComposeReducer(
+        return ReviewComposeReducer(
             useCase: makeRestaurantUseCase(repository: repository),
             steps: steps
         )

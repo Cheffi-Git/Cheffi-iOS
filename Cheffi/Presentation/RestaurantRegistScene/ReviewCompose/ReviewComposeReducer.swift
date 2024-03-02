@@ -1,5 +1,5 @@
 //
-//  RestaurantInfoComposeReducer.swift
+//  ReviewComposeReducer.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/14/24.
@@ -9,12 +9,12 @@ import Foundation
 import Combine
 import ComposableArchitecture
 
-struct RestaurantInfoComposeReducer: Reducer {
+struct ReviewComposeReducer: Reducer {
     private enum Policy {
         static let maxMenuCount = 5
     }
     
-    let useCase: RestaurantUseCase
+    private let useCase: RestaurantUseCase
     let steps: PassthroughSubject<RouteStep, Never>
 
     init(
@@ -187,11 +187,19 @@ struct RestaurantInfoComposeReducer: Reducer {
         case .bottomButtonAction(let action):
             switch action {
             case .tap:
-                steps.send(.)
+                let composedRestaurantInfo = RegisterReviewRequest(
+                    restaurantId: state.restaurant.id,
+                    registered: state.restaurant.registered,
+                    title: state.titleTextFieldBarState.txt,
+                    text: state.mainTextEditorViewState.txt,
+                    menus: state.composedMenus,
+                    tag: TagsChangeRequest(foodTags: [], tasteTags: [])
+                )
+                steps.send(.pushRestaurantInfoHashtags(composedRestaurantInfo))
                 return .none
             }
         }
     }
 }
 
-extension RestaurantInfoComposeReducer: Stepper {}
+extension ReviewComposeReducer: Stepper {}

@@ -9,15 +9,15 @@ import UIKit
 import Combine
 
 protocol RestaurantRegistFlowCoordinatorDependencies {
-    func makeRestaurantRegistViewController(reducer: RestaurantRegistReducer) -> RestaurantRegistViewController
-    func makeRestaurantRegistReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantRegistReducer
+    func makeRestaurantRegistSearchViewController(reducer: RestaurantRegistSearchReducer) -> RestaurantRegistSearchViewController
+    func makeRestaurantRegistSearchReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantRegistSearchReducer
     func makeRestaurantRegistComposeViewController(reducer: RestaurantRegistComposeReducer) -> RestaurantRegistComposeViewController
     func makeRestaurantRegistComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantRegistComposeReducer
-    func makeRestaurantInfoComposeViewController(
-        reducer: RestaurantInfoComposeReducer,
+    func makeReviewComposeViewController(
+        reducer: ReviewComposeReducer,
         restaurant: RestaurantInfoDTO
-    ) -> RestaurantInfoComposeViewController
-    func makeRestaurantInfoComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> RestaurantInfoComposeReducer
+    ) -> ReviewComposeViewController
+    func makeReviewComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewComposeReducer
 }
 
 final class RestaurantRegistFlowCoordinator {
@@ -46,8 +46,8 @@ final class RestaurantRegistFlowCoordinator {
                     pushRestaurantRegistSearch()
                 case .pushRestaurantRegistCompose:
                     pushRestaurantRegistCompose()
-                case .pushRestaurantInfoCompose(let restaurant):
-                    pushRestaurantInfoCompose(info: restaurant)
+                case .pushReviewCompose(let restaurant):
+                    pushReviewCompose(info: restaurant)
                 case .presentCamera(let isPresentPhotoAlbum, let dismissCompletion):
                     presentCamera(isPresentPhotoAlbum: isPresentPhotoAlbum, dismissCompletion: dismissCompletion)
                 case .presentPhotoAlbum(let dismissCompletion):
@@ -72,8 +72,8 @@ final class RestaurantRegistFlowCoordinator {
     }
     
     private func pushRestaurantRegistSearch() {
-        let reducer = dependencies.makeRestaurantRegistReducer(steps: steps)
-        let vc = dependencies.makeRestaurantRegistViewController(reducer: reducer)
+        let reducer = dependencies.makeRestaurantRegistSearchReducer(steps: steps)
+        let vc = dependencies.makeRestaurantRegistSearchViewController(reducer: reducer)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -83,9 +83,9 @@ final class RestaurantRegistFlowCoordinator {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func pushRestaurantInfoCompose(info: RestaurantInfoDTO) {
-        let reducer = dependencies.makeRestaurantInfoComposeReducer(steps: steps)
-        let vc = dependencies.makeRestaurantInfoComposeViewController(reducer: reducer, restaurant: info)
+    private func pushReviewCompose(info: RestaurantInfoDTO) {
+        let reducer = dependencies.makeReviewComposeReducer(steps: steps)
+        let vc = dependencies.makeReviewComposeViewController(reducer: reducer, restaurant: info)
         navigationController?.pushViewController(vc, animated: true)
     }
     

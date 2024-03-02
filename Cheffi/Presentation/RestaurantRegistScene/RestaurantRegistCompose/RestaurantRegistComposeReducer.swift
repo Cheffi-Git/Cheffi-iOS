@@ -10,7 +10,7 @@ import Combine
 import ComposableArchitecture
 
 struct RestaurantRegistComposeReducer: Reducer {
-    let useCase: RestaurantUseCase
+    private let useCase: RestaurantUseCase
     let steps: PassthroughSubject<RouteStep, Never>
 
     init(
@@ -175,7 +175,7 @@ struct RestaurantRegistComposeReducer: Reducer {
                     .catch { Just(Action.occerError($0)) }
             }
         case .successRegist(let restaurant):
-            steps.send(.pushRestaurantInfoCompose(info: restaurant))
+            steps.send(.pushReviewCompose(info: restaurant))
             return .none
         case .occerError(let error):
             state.error = error.localizedDescription

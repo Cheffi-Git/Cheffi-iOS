@@ -1,5 +1,5 @@
 //
-//  RestaurantRegistReducer.swift
+//  RestaurantRegistSearchReducer.swift
 //  Cheffi
 //
 //  Created by Eli_01 on 12/17/23.
@@ -9,8 +9,8 @@ import Foundation
 import Combine
 import ComposableArchitecture
 
-struct RestaurantRegistReducer: Reducer {
-    let useCase: RestaurantUseCase
+struct RestaurantRegistSearchReducer: Reducer {
+    private let useCase: RestaurantUseCase
     let steps: PassthroughSubject<RouteStep, Never>
 
     init(
@@ -115,11 +115,11 @@ struct RestaurantRegistReducer: Reducer {
         case .restaurantListAction(let action):
             switch action {
             case .tap(let item):
-                steps.send(.pushRestaurantInfoCompose(info: item))
+                steps.send(.pushReviewCompose(info: item))
                 return .none
             }
         }
     }
 }
 
-extension RestaurantRegistReducer: Stepper {}
+extension RestaurantRegistSearchReducer: Stepper {}

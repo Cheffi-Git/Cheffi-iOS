@@ -1,5 +1,5 @@
 //
-//  RestaurantInfoComposeViewController.swift
+//  ReviewComposeViewController.swift
 //  Cheffi
 //
 //  Created by 김문옥 on 1/14/24.
@@ -8,12 +8,12 @@
 import UIKit
 import ComposableArchitecture
 
-class RestaurantInfoComposeViewController: UIViewController {
-    private let reducer: RestaurantInfoComposeReducer
+class ReviewComposeViewController: UIViewController {
+    private let reducer: ReviewComposeReducer
     private let restaurant: RestaurantInfoDTO
     
     init(
-        reducer: RestaurantInfoComposeReducer,
+        reducer: ReviewComposeReducer,
         restaurant: RestaurantInfoDTO
     ) {
         self.reducer = reducer
@@ -29,8 +29,8 @@ class RestaurantInfoComposeViewController: UIViewController {
         super.viewDidLoad()
 
         addHostingController(
-            view: RestaurantInfoComposeView(
-                Store(initialState: RestaurantInfoComposeReducer.State(
+            view: ReviewComposeView(
+                Store(initialState: ReviewComposeReducer.State(
                     restaurant: restaurant, 
                     titleTextFieldBarState: TextFieldBarReducer.State(
                         placeHolder: "\(restaurant.name) 맛있어요",
