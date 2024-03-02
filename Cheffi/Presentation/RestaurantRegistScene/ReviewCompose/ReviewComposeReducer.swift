@@ -36,7 +36,7 @@ struct ReviewComposeReducer: Reducer {
         
         let navigationBarState = NavigationBarReducer.State(
             title: "내 맛집 등록",
-            buttonKind: .back
+            leftButtonKind: .back
         )
         var titleTextFieldBarState: TextFieldBarReducer.State
         var mainTextEditorViewState = TextEditorViewReducer.State(
@@ -129,9 +129,10 @@ struct ReviewComposeReducer: Reducer {
             return .none
         case .navigationBarAction(let action):
             switch action {
-            case .tap:
+            case .leftButtonTapped:
                 steps.send(.popToNavigationController)
-                return .none
+                fallthrough
+            default: return .none
             }
         case .titleTextFieldBarAction(let action):
             switch action {
@@ -195,7 +196,7 @@ struct ReviewComposeReducer: Reducer {
                     menus: state.composedMenus,
                     tag: TagsChangeRequest(foodTags: [], tasteTags: [])
                 )
-                steps.send(.pushReviewHashtags(composedReviewInfo))
+                steps.send(.pushReviewHashtags(.posting(composedReviewInfo)))
                 return .none
             }
         }

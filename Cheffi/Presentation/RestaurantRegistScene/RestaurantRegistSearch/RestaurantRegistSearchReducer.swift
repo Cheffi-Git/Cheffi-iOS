@@ -28,7 +28,7 @@ struct RestaurantRegistSearchReducer: Reducer {
         
         let navigationBarState = NavigationBarReducer.State(
             title: "내 맛집 등록",
-            buttonKind: .close
+            leftButtonKind: .close
         )
         var searchBarState = SearchBarReducer.State()
         var nearRestaurantListState = NearRestaurantListReducer.State()
@@ -82,9 +82,10 @@ struct RestaurantRegistSearchReducer: Reducer {
             return .none
         case .navigationBarAction(let action):
             switch action {
-            case .tap:
+            case .leftButtonTapped:
                 steps.send(.dismissRestaurantRegist)
-                return .none
+                fallthrough
+            default: return .none
             }
         case .searchBarAction(let action):
             switch action {

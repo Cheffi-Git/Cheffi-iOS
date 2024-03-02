@@ -22,15 +22,25 @@ struct ReviewHashtagsReducer: Reducer {
     }
     
     struct State: Equatable {
-        var reviewRequestInfo: RegisterReviewRequest
+        var reviewRequestInfo: ReviewHashtagsActionType
+        
+        var navigationBarState: NavigationBarReducer.State
     }
     
     enum Action {
-        case postingButtonTapped
+        case navigationBarAction(NavigationBarReducer.Action)
     }
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        .none
+        switch action {
+        case .navigationBarAction(let action):
+            switch action {
+            case .leftButtonTapped:
+                steps.send(.popToNavigationController)
+                fallthrough
+            default: return .none
+            }
+        }
     }
 }
 

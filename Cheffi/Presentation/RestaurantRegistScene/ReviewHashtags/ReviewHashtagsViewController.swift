@@ -8,16 +8,28 @@
 import UIKit
 import ComposableArchitecture
 
+enum ReviewHashtagsActionType: Equatable {
+    case posting(RegisterReviewRequest)
+    case modification(TagsChangeRequest)
+    
+    var naviRightButtonTitle: String {
+        switch self {
+        case .posting: return "게시하기"
+        case .modification: return "수정하기"
+        }
+    }
+}
+
 class ReviewHashtagsViewController: UIViewController {
     private let reducer: ReviewHashtagsReducer
-    private let composedReviewInfo: RegisterReviewRequest
+    private let reviewHashtagsAction: ReviewHashtagsActionType
     
     init(
         reducer: ReviewHashtagsReducer,
-        composedReviewInfo: RegisterReviewRequest
+        reviewHashtagsAction: ReviewHashtagsActionType
     ) {
         self.reducer = reducer
-        self.composedReviewInfo = composedReviewInfo
+        self.reviewHashtagsAction = reviewHashtagsAction
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,7 +44,12 @@ class ReviewHashtagsViewController: UIViewController {
         addHostingController(
             view: ReviewHashtagsView(
                 Store(initialState: ReviewHashtagsReducer.State(
-                    reviewRequestInfo: composedReviewInfo
+                    reviewRequestInfo: reviewHashtagsAction,
+                    navigationBarState: NavigationBarReducer.State(
+                        title: "",
+                        leftButtonKind: .back,
+                        rightButtonTitle: reviewHashtagsAction.naviRightButtonTitle
+                    )
                 )) {
                     reducer._printChanges()
                 }

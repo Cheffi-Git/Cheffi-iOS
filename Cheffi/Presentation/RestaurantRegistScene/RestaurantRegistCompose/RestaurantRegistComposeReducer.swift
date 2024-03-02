@@ -24,7 +24,7 @@ struct RestaurantRegistComposeReducer: Reducer {
     struct State: Equatable {
         let navigationBarState = NavigationBarReducer.State(
             title: "내 맛집 등록",
-            buttonKind: .back
+            leftButtonKind: .back
         )
         var provinceDropDownPickerState = DropDownPickerReducer.State(
             placeHolder: "광역시 / 도",
@@ -84,9 +84,10 @@ struct RestaurantRegistComposeReducer: Reducer {
         switch action {
         case .navigationBarAction(let action):
             switch action {
-            case .tap:
+            case .leftButtonTapped:
                 steps.send(.popToNavigationController)
-                return .none
+                fallthrough
+            default: return .none
             }
         case .provinceDropDownPickerAction(let action):
             switch action {

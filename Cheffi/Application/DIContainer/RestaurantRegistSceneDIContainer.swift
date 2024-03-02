@@ -67,9 +67,9 @@ final class RestaurantRegistSceneDIContainer: RestaurantRegistFlowCoordinatorDep
     // MARK: - Review Hashtags
     func makeReviewHashtagsViewController(
         reducer: ReviewHashtagsReducer,
-        composedReviewInfo: RegisterReviewRequest
+        reviewHashtagsAction: ReviewHashtagsActionType
     ) -> ReviewHashtagsViewController {
-        ReviewHashtagsViewController(reducer: reducer, composedReviewInfo: composedReviewInfo)
+        ReviewHashtagsViewController(reducer: reducer, reviewHashtagsAction: reviewHashtagsAction)
     }
     
     func makeReviewHashtagsReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewHashtagsReducer {

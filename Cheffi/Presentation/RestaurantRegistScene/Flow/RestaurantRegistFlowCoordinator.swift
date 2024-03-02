@@ -20,7 +20,7 @@ protocol RestaurantRegistFlowCoordinatorDependencies {
     func makeReviewComposeReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewComposeReducer
     func makeReviewHashtagsViewController(
         reducer: ReviewHashtagsReducer,
-        composedReviewInfo: RegisterReviewRequest
+        reviewHashtagsAction: ReviewHashtagsActionType
     ) -> ReviewHashtagsViewController
     func makeReviewHashtagsReducer(steps: PassthroughSubject<RouteStep, Never>) -> ReviewHashtagsReducer
 }
@@ -57,8 +57,8 @@ final class RestaurantRegistFlowCoordinator {
                     presentCamera(isPresentPhotoAlbum: isPresentPhotoAlbum, dismissCompletion: dismissCompletion)
                 case .presentPhotoAlbum(let dismissCompletion):
                     presentPhotoAlbum(dismissCompletion: dismissCompletion)
-                case .pushReviewHashtags(let composedReviewInfo):
-                    pushReviewHashtags(composedReviewInfo)
+                case .pushReviewHashtags(let reviewHashtagsAction):
+                    pushReviewHashtags(reviewHashtagsAction)
                 }
             }
             .store(in: &cancellables)
@@ -107,9 +107,9 @@ final class RestaurantRegistFlowCoordinator {
         parentCoordinator?.showPhotoAlbum(dismissCompletion: dismissCompletion)
     }
     
-    private func pushReviewHashtags(_ composedReviewInfo: RegisterReviewRequest) {
+    private func pushReviewHashtags(_ reviewHashtagsAction: ReviewHashtagsActionType) {
         let reducer = dependencies.makeReviewHashtagsReducer(steps: steps)
-        let vc = dependencies.makeReviewHashtagsViewController(reducer: reducer, composedReviewInfo: composedReviewInfo)
+        let vc = dependencies.makeReviewHashtagsViewController(reducer: reducer, reviewHashtagsAction: reviewHashtagsAction)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

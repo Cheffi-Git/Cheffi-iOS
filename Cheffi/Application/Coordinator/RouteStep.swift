@@ -20,5 +20,5 @@ enum RouteStep {
     case presentPhotoAlbum(
         dismissCompletion: (([Data?]) -> Void)?
     )
-    case pushReviewHashtags(RegisterReviewRequest)
+    case pushReviewHashtags(ReviewHashtagsActionType)
 }
