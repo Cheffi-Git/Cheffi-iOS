@@ -21,64 +21,62 @@ struct ReviewHashtagsView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 0) {
-                NavigationBarView(store.scope(
-                    state: \.navigationBarState,
-                    action: ReviewHashtagsReducer.Action.navigationBarAction
-                ))
-                
-                Text("나만의 맛집을 나타내는\n해시태그를 선택해주세요!")
-                    .font(.custom("SUIT", size: 22).weight(.semibold))
-                    .foregroundColor(.cheffiGray9)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(Metrics.headlinePadding)
-                
-                Text("음식 종류 (1개 이상)")
-                    .font(.custom("SUIT", size: 15).weight(.medium))
-                    .foregroundColor(.cheffiGray6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(Metrics.sectionTitlePadding)
-                
-                FlexibleTagListView(
-                    data: viewStore.allTags.filter { $0.type == .food },
-                    spacing: Metrics.tagSpacing,
-                    alignment: .leading
-                ) { item in
-                    Text(verbatim: item.name)
+        VStack(spacing: 0) {
+            NavigationBarView(store.scope(
+                state: \.navigationBarState,
+                action: ReviewHashtagsReducer.Action.navigationBarAction
+            ))
+        
+            ScrollView(.vertical) {
+                VStack(spacing: 0) {
+                    Text("나만의 맛집을 나타내는\n해시태그를 선택해주세요!")
+                        .font(.custom("SUIT", size: 22).weight(.semibold))
+                        .foregroundColor(.cheffiGray9)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(Metrics.headlinePadding)
+                    
+                    Text("음식 종류 (1개 이상)")
                         .font(.custom("SUIT", size: 15).weight(.medium))
-                        .foregroundColor(.cheffiGray8)
-                        .padding(Metrics.tagItemPadding)
-                        .background(
-                            RoundedRectangle(cornerRadius: 1000)
-                                .inset(by: 0.5)
-                                .stroke(.cheffiGray2, lineWidth: 1)
-                        )
-                }
-                .padding(Metrics.tagListPadding)
-                
-                Text("맛과 특징 (2개이상)")
-                    .font(.custom("SUIT", size: 15).weight(.medium))
-                    .foregroundColor(.cheffiGray6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(Metrics.sectionTitlePadding)
-                
-                FlexibleTagListView(
-                    data: viewStore.allTags.filter { $0.type == .taste },
-                    spacing: Metrics.tagSpacing,
-                    alignment: .leading
-                ) { item in
-                    Text(verbatim: item.name)
+                        .foregroundColor(.cheffiGray6)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(Metrics.sectionTitlePadding)
+                    
+                    FlexibleTagListView(
+                        data: viewStore.allTags.filter { $0.type == .food },
+                        spacing: Metrics.tagSpacing,
+                        alignment: .leading
+                    ) { item in
+                        TagItemButton {
+                            viewStore.send(.tagButtonTapped(item))
+                        } label: {
+                            Text(verbatim: item.name)
+                                .font(.custom("SUIT", size: 15).weight(.medium))
+                                .padding(Metrics.tagItemPadding)
+                        }
+                    }
+                    .padding(Metrics.tagListPadding)
+                    
+                    Text("맛과 특징 (2개이상)")
                         .font(.custom("SUIT", size: 15).weight(.medium))
-                        .foregroundColor(.cheffiGray8)
-                        .padding(Metrics.tagItemPadding)
-                        .background(
-                            RoundedRectangle(cornerRadius: 1000)
-                                .inset(by: 0.5)
-                                .stroke(.cheffiGray2, lineWidth: 1)
-                        )
+                        .foregroundColor(.cheffiGray6)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(Metrics.sectionTitlePadding)
+                    
+                    FlexibleTagListView(
+                        data: viewStore.allTags.filter { $0.type == .taste },
+                        spacing: Metrics.tagSpacing,
+                        alignment: .leading
+                    ) { item in
+                        TagItemButton {
+                            viewStore.send(.tagButtonTapped(item))
+                        } label: {
+                            Text(verbatim: item.name)
+                                .font(.custom("SUIT", size: 15).weight(.medium))
+                                .padding(Metrics.tagItemPadding)
+                        }
+                    }
+                    .padding(Metrics.tagListPadding)
                 }
-                .padding(Metrics.tagListPadding)
             }
         }
         .onAppear {

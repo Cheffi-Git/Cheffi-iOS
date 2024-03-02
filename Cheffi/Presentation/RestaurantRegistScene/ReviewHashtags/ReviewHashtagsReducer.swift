@@ -31,6 +31,7 @@ struct ReviewHashtagsReducer: Reducer {
     
     enum Action {
         case onAppear
+        case tagButtonTapped(TagDTO)
         
         case navigationBarAction(NavigationBarReducer.Action)
     }
@@ -63,6 +64,55 @@ struct ReviewHashtagsReducer: Reducer {
                 TagDTO(id: 20, type: .taste, name: "혼밥")
             ]
             state.allTags = allTags
+            return .none
+        case .tagButtonTapped(let tag):
+            switch state.reviewRequestInfo {
+            case .posting(let reviewRequest):
+                var foodTags = reviewRequest.tag.foodTags
+                var tasteTags = reviewRequest.tag.tasteTags
+                switch tag.type {
+                case .food:
+                    if foodTags.contains(where: { $0 == tag.id }) {
+                        foodTags = foodTags.filter { $0 != tag.id }
+                    } else {
+                        foodTags.append(tag.id)
+                    }
+                case .taste:
+                    if tasteTags.contains(where: { $0 == tag.id }) {
+                        tasteTags = tasteTags.filter { $0 != tag.id }
+                    } else {
+                        tasteTags.append(tag.id)
+                    }
+                }
+                let review = RegisterReviewRequest(
+                    restaurantId: reviewRequest.restaurantId,
+                    registered: reviewRequest.registered,
+                    title: reviewRequest.title,
+                    text: reviewRequest.text,
+                    menus: reviewRequest.menus,
+                    tag: TagsChangeRequest(foodTags: foodTags, tasteTags: tasteTags)
+                )
+                state.reviewRequestInfo = .posting(review)
+            case .modification(let tagsRequest):
+                var foodTags = tagsRequest.foodTags
+                var tasteTags = tagsRequest.tasteTags
+                switch tag.type {
+                case .food:
+                    if foodTags.contains(where: { $0 == tag.id }) {
+                        foodTags = foodTags.filter { $0 != tag.id }
+                    } else {
+                        foodTags.append(tag.id)
+                    }
+                case .taste:
+                    if tasteTags.contains(where: { $0 == tag.id }) {
+                        tasteTags = tasteTags.filter { $0 != tag.id }
+                    } else {
+                        tasteTags.append(tag.id)
+                    }
+                }
+                let tags = TagsChangeRequest(foodTags: foodTags, tasteTags: tasteTags)
+                state.reviewRequestInfo = .modification(tags)
+            }
             return .none
         case .navigationBarAction(let action):
             switch action {
