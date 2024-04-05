@@ -22,4 +22,5 @@ enum RouteStep {
     )
     case pushReviewHashtags(ReviewHashtagsActionType)
     case dismissNationalTrend
+    case pushNationalTrend
 }
