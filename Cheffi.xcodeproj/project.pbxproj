@@ -17,6 +17,7 @@
 		6B0497732BB7EFE200092A58 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0497722BB7EFE200092A58 /* LocationManager.swift */; };
 		6B0497792BBFDD6300092A58 /* NationalTrendReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0497782BBFDD6300092A58 /* NationalTrendReducer.swift */; };
 		6B04977B2BBFE0BB00092A58 /* NationalTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B04977A2BBFE0BB00092A58 /* NationalTrendView.swift */; };
+		6B04977D2BC0192B00092A58 /* MyPageReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B04977C2BC0192B00092A58 /* MyPageReducer.swift */; };
 		6B08FE992B541D3900BBC74B /* RestaurantRegistComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08FE982B541D3900BBC74B /* RestaurantRegistComposeViewController.swift */; };
 		6B08FE9B2B541D6500BBC74B /* ReviewComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08FE9A2B541D6500BBC74B /* ReviewComposeViewController.swift */; };
 		6B08FEA02B541E7200BBC74B /* RestaurantRegistComposeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B08FE9F2B541E7200BBC74B /* RestaurantRegistComposeReducer.swift */; };
@@ -926,18 +927,19 @@
 			isa = PBXGroup;
 			children = (
 				CE0D452E2A61964E00636989 /* Flow */,
-				CE0D452D2A61964600636989 /* Views */,
+				CE0D452D2A61964600636989 /* MyPage */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
 		};
-		CE0D452D2A61964600636989 /* Views */ = {
+		CE0D452D2A61964600636989 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
 				CE0D45372A61AA5A00636989 /* MyPageViewController.swift */,
 				CE0D45392A61AA7700636989 /* MyPage.storyboard */,
+				6B04977C2BC0192B00092A58 /* MyPageReducer.swift */,
 			);
-			path = Views;
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		CE0D452E2A61964E00636989 /* Flow */ = {
@@ -2128,6 +2130,7 @@
 				6B795D022B9338E60000FB43 /* ReviewHashtagsViewController.swift in Sources */,
 				D420F1712AE64BE300DC10ED /* DefaultAreaRepository.swift in Sources */,
 				CE0D45422A626C3B00636989 /* SimilarChefCell.swift in Sources */,
+				6B04977D2BC0192B00092A58 /* MyPageReducer.swift in Sources */,
 				6B08FEA22B541EAD00BBC74B /* RestaurantRegistComposeView.swift in Sources */,
 				6BDABB702B826130001E2A67 /* TextEditorView.swift in Sources */,
 				FF3197772A74C90E00F5DD41 /* CheffiReviewView.swift in Sources */,
