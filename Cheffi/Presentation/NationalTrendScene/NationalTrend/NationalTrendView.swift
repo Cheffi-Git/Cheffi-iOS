@@ -13,12 +13,49 @@ import ViewStore
 @ViewStore(NationalTrendReducer.self)
 struct NationalTrendView: View {
     var body: some View {
-        VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Button {
-                viewStore.send(.closeButtonTapped)
-            } label: {
-                Image("icClose")
+        ZStack {
+            Color.cheffiDimmed
+                .ignoresSafeArea()
+            
+            GeometryReader {
+                VStack(spacing: 0) {
+                    VStack(spacing: 0) {
+                        HStack(alignment: .top, spacing: 16) {
+                            Text("NATION\nWIDE\nTREND")
+                                .font(.custom("SUIT", size: 32).weight(.black))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .underline()
+                                .foregroundColor(.cheffiWhite)
+                                .padding(EdgeInsets(top: 14, leading: 0, bottom: 12, trailing: 0))
+                            
+                            Button {
+                                viewStore.send(.closeButtonTapped)
+                            } label: {
+                                Image("icClose")
+                                    .renderingMode(.template)
+                                    .tint(.cheffiWhite)
+                                    .frame(width: 46, height: 46)
+                            }
+                        }
+                        
+                        Text("전국 쉐피가 인정한\n그 곳, 쉐피 전국 맛집")
+                            .font(.custom("SUIT", size: 16))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.cheffiWhite)
+                        
+                        Text("COMING SOON")
+                            .font(.custom("SUIT", size: 16))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.cheffiWhite)
+                            .padding(EdgeInsets(top: 166, leading: 16, bottom: 0, trailing: 16))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(EdgeInsets(top: 10, leading: 16, bottom: 16, trailing: 16))
+                    .background(.cheffiBlack)
+                    .cornerRadius(16.0)
+                }
+                .padding(.horizontal, 16.0)
+                .frame(width: $0.size.width, height: $0.size.height)
             }
         }
     }
