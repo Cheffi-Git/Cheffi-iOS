@@ -63,12 +63,12 @@ struct TextFieldBarView: View {
             }
         }
         .padding(Metrics.barPadding)
-        .background(.cheffiWhite)
+        .background(Color.cheffiWhite)
         .overlay(
             RoundedRectangle(cornerRadius: Metrics.barCornerRadius)
                 .inset(by: Metrics.barBorderInset)
                 .stroke(
-                    isFocused ? .cheffiGray9 : .cheffiGray3,
+                    isFocused ? Color.cheffiGray9 : .cheffiGray3,
                     lineWidth: Metrics.barBorderWidth
                 )
         )

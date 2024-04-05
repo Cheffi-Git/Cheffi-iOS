@@ -53,7 +53,7 @@ struct RestaurantMenuComposePopupView: View {
                                 .padding(Metrics.buttonLabelPadding)
                                 .font(.custom("SUIT", size: 16).weight(.medium))
                                 .foregroundColor(viewStore.tappable ? .cheffiWhite : .cheffiGray5)
-                                .background(viewStore.tappable ? .mainCTA : .cheffiGray1)
+                                .background(viewStore.tappable ? Color.mainCTA : .cheffiGray1)
                                 .cornerRadius(Metrics.buttonLabelCornerRadius)
                         }
                         .disabled(!viewStore.tappable)
@@ -61,7 +61,7 @@ struct RestaurantMenuComposePopupView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(Metrics.popupViewPadding)
-                    .background(.cheffiWhite)
+                    .background(Color.cheffiWhite)
                     .cornerRadius(Metrics.buttonLabelCornerRadius)
                 }
                 .padding(.horizontal, Metrics.outsidePadding)

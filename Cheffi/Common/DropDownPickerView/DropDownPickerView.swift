@@ -62,7 +62,7 @@ struct DropDownPickerView: View {
             .cornerRadius(10)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(viewStore.isShowDropdown ? .cheffiGray9 : .cheffiGray4)
+                    .stroke(viewStore.isShowDropdown ? Color.cheffiGray9 : .cheffiGray4)
             }
             .frame(height: size.height, alignment: viewStore.dropDownPickerState == .top ? .bottom : .top)
             
@@ -79,12 +79,12 @@ struct DropDownPickerView: View {
                             .font(.custom("SUIT", size: 14))
                         Spacer()
                     }
-                    .foregroundStyle(.cheffiGray8)
+                    .foregroundStyle(Color.cheffiGray8)
                     .animation(.none, value: viewStore.selection)
                     .contentShape(.rect)
                     .padding(.horizontal, 15)
                     .frame(width: size.width, height: size.height)
-                    .background(viewStore.selection == option ? .cheffiGray1 : .cheffiWhite)
+                    .background(viewStore.selection == option ? Color.cheffiGray1 : .cheffiWhite)
                     .onTapGesture {
                         return withAnimation(.snappy) {
                             viewStore.send(.select(option))

@@ -38,6 +38,7 @@
 		6B795D132B93A1EE0000FB43 /* TagItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B795D122B93A1EE0000FB43 /* TagItemButton.swift */; };
 		6B7D8AEF2B53FBAF00786ACE /* RouteStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D8AEE2B53FBAF00786ACE /* RouteStep.swift */; };
 		6B7D8AF22B54030900786ACE /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7D8AF12B54030900786ACE /* Stepper.swift */; };
+		6BA2D3082BC0353F0051D5C6 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA2D3072BC0353F0051D5C6 /* Color+Extensions.swift */; };
 		6BA9B9822B42C4AE0010290C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9B9812B42C4AD0010290C /* SearchBarView.swift */; };
 		6BA9B9862B42D0C90010290C /* SearchBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9B9852B42D0C90010290C /* SearchBarReducer.swift */; };
 		6BA9F54F2B4A8BE100A96321 /* EmptyDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9F54E2B4A8BE100A96321 /* EmptyDescriptionView.swift */; };
@@ -380,6 +381,7 @@
 		6B795D122B93A1EE0000FB43 /* TagItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagItemButton.swift; sourceTree = "<group>"; };
 		6B7D8AEE2B53FBAF00786ACE /* RouteStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStep.swift; sourceTree = "<group>"; };
 		6B7D8AF12B54030900786ACE /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
+		6BA2D3072BC0353F0051D5C6 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		6BA9B9812B42C4AD0010290C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6BA9B9852B42D0C90010290C /* SearchBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarReducer.swift; sourceTree = "<group>"; };
 		6BA9F54E2B4A8BE100A96321 /* EmptyDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDescriptionView.swift; sourceTree = "<group>"; };
@@ -1050,6 +1052,7 @@
 				FFC58AD42A8756B10095BCF4 /* UIApplication+Extensions.swift */,
 				FFC7C66F2A88F87400EBE162 /* UIImage+Extensions.swift */,
 				FFA6BA6E2ADA8B670094913E /* Data+Extensions.swift */,
+				6BA2D3072BC0353F0051D5C6 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2253,6 +2256,7 @@
 				FFAA44FA2A83C30E0090AA9E /* ProfilePhotoViewModel.swift in Sources */,
 				FF4659CF2A87DE6800736AEA /* PhotoAlbumListView.swift in Sources */,
 				CE0D45382A61AA5A00636989 /* MyPageViewController.swift in Sources */,
+				6BA2D3082BC0353F0051D5C6 /* Color+Extensions.swift in Sources */,
 				FF2FA1A62AE6A70900AD0F1B /* SimilarChefEmptyView.swift in Sources */,
 				FF35FB032ADD5357002D9E47 /* RestaurantDTO.swift in Sources */,
 				FFA6BA762ADAD9080094913E /* TasteSelectionViewModel.swift in Sources */,
@@ -2437,7 +2441,8 @@
 			baseConfigurationReference = A5A5049924D68E85F7C5AD84 /* Pods-Cheffi.stage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cheffi/Cheffi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2653,7 +2658,8 @@
 			baseConfigurationReference = 1B24CC8C1560BF374B8A3ED8 /* Pods-Cheffi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cheffi/Cheffi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2692,7 +2698,8 @@
 			baseConfigurationReference = 5D148B9BF9EC9E451CCFEBDE /* Pods-Cheffi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Cheffi/Cheffi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

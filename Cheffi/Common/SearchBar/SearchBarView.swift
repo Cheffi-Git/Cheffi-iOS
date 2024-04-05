@@ -42,7 +42,7 @@ struct SearchBarView: View {
             .padding()
             .frame(height: Metrics.barHeight)
             .foregroundColor(.cheffiBlack)
-            .background(.cheffiWhite05)
+            .background(Color.cheffiWhite05)
             .cornerRadius(Metrics.barCornerRadius)
         }
         .padding(Metrics.barPaddingEdgeInsets)

@@ -16,7 +16,7 @@ struct TagItemButtonStyle: ButtonStyle {
             .background(
                 RoundedRectangle(cornerRadius: 1000)
                     .inset(by: 0.5)
-                    .stroke(isSelected ? .mainCTA : .cheffiGray2, lineWidth: 1)
+                    .stroke(isSelected ? Color.mainCTA : .cheffiGray2, lineWidth: 1)
             )
             .animation(.linear)
     }

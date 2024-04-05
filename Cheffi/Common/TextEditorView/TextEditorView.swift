@@ -59,12 +59,12 @@ struct TextEditorView: View {
                 }
             }
             .padding(Metrics.viewPadding)
-            .background(.cheffiWhite)
+            .background(Color.cheffiWhite)
             .overlay(
                 RoundedRectangle(cornerRadius: Metrics.viewCornerRadius)
                     .inset(by: Metrics.viewBorderInset)
                     .stroke(
-                        isFocused ? .cheffiGray9 : .cheffiGray3,
+                        isFocused ? Color.cheffiGray9 : .cheffiGray3,
                         lineWidth: Metrics.viewBorderWidth
                     )
             )

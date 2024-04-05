@@ -77,7 +77,7 @@ struct ReviewComposeView: View {
                                                 Button {
                                                     viewStore.send(.deselectPhoto(data))
                                                 } label: {
-                                                    Image(.icCloseCircle)
+                                                    Image("icCloseCircle")
                                                         .position(CGPoint(
                                                             x: Metrics.photoThumbnailImageSize.width - 16.0,
                                                             y: 16.0
@@ -98,7 +98,7 @@ struct ReviewComposeView: View {
                             self.isShowAlertAction = true
                         } label: {
                             HStack(spacing: Metrics.attatchPhotoButtonContentsSpacing) {
-                                Image(.attatchPhoto)
+                                Image("attatch_photo")
                                 
                                 Text("사진 첨부하기")
                                     .font(.custom("SUIT", size: 14).weight(.medium))
@@ -123,7 +123,7 @@ struct ReviewComposeView: View {
                             RoundedRectangle(cornerRadius: Metrics.attatchPhotoButtonCornerRadius)
                                 .inset(by: 0.5)
                                 .stroke(
-                                    .cheffiPink1,
+                                    Color.cheffiPink1,
                                     lineWidth: 1
                                 )
                         )
@@ -177,7 +177,7 @@ struct ReviewComposeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         if viewStore.composedMenus.isEmpty {
-                            Image(.emptyMenuBackground)
+                            Image("empty_menu_background")
                                 .padding(Metrics.menuAskingBackgroundImagePadding)
                         } else {
                             ForEach(viewStore.composedMenus, id: \.self) { menu in
@@ -195,7 +195,7 @@ struct ReviewComposeView: View {
                                     Button {
                                         viewStore.send(.deleteMenuItem(menu))
                                     } label: {
-                                        Image(.iconClose)
+                                        Image("icon_close")
                                     }
                                 }
                                 .padding(.top, Metrics.menuItemHStackTopPadding)
@@ -207,7 +207,7 @@ struct ReviewComposeView: View {
                         } label: {
                             HStack(spacing: Metrics.attatchPhotoButtonContentsSpacing) {
                                 if viewStore.composedMenus.isEmpty == false {
-                                    Image(.iconPlus)
+                                    Image("icon_plus")
                                 }
                                 
                                 Text(viewStore.composedMenus.isEmpty ? "메뉴 선택" : "메뉴 추가하기")
@@ -220,7 +220,7 @@ struct ReviewComposeView: View {
                             RoundedRectangle(cornerRadius: Metrics.attatchPhotoButtonCornerRadius)
                                 .inset(by: 0.5)
                                 .stroke(
-                                    viewStore.composedMenus.isEmpty ? .cheffiPink1 : .cheffiGray2,
+                                    viewStore.composedMenus.isEmpty ? Color.cheffiPink1 : .cheffiGray2,
                                     lineWidth: 1
                                 )
                         )
@@ -280,12 +280,12 @@ struct ReviewComposeView_Preview: PreviewProvider {
                     registered: false
                 ),
                 selectedImageDatas: [
-                    UIImage(resource: .icCamera).pngData()!,
-                    UIImage(resource: .icAppleLogo).pngData()!,
-                    UIImage(resource: .icArrowRight).pngData()!,
-                    UIImage(resource: .loginBackground).pngData()!,
-                    UIImage(resource: .icSearch).pngData()!
-                ], 
+                    UIImage(named: "icCamera")!.pngData()!,
+                    UIImage(named: "icAppleLogo")!.pngData()!,
+                    UIImage(named: "icArrowRight")!.pngData()!,
+                    UIImage(named: "loginBackground")!.pngData()!,
+                    UIImage(named: "icSearch")!.pngData()!
+                ],
                 isShowMenuComposePopup: false, 
                 titleTextFieldBarState: TextFieldBarReducer.State(
                     placeHolder: "기사식당 맛있어요",

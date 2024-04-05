@@ -49,7 +49,7 @@ struct ConfirmPopupView: View {
                                         .padding(Metrics.buttonPadding)
                                         .font(.custom("SUIT", size: 16).weight(.medium))
                                         .foregroundColor(.cheffiGray6)
-                                        .background(.cheffiWhite05)
+                                        .background(Color.cheffiWhite05)
                                         .cornerRadius(Metrics.buttonCornerRadius)
                                 }
                             }
@@ -62,7 +62,7 @@ struct ConfirmPopupView: View {
                                     .padding(Metrics.buttonPadding)
                                     .font(.custom("SUIT", size: 16).weight(.medium))
                                     .foregroundColor(.cheffiWhite)
-                                    .background(.mainCTA)
+                                    .background(Color.mainCTA)
                                     .cornerRadius(Metrics.buttonCornerRadius)
                             }
                         }
@@ -70,7 +70,7 @@ struct ConfirmPopupView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(Metrics.popupViewPadding)
-                    .background(.cheffiWhite)
+                    .background(Color.cheffiWhite)
                     .cornerRadius(Metrics.buttonCornerRadius)
                     
                     if let optionButtonTitle = viewStore.optionButtonTitle {

@@ -26,7 +26,7 @@ struct BottomButtonView: View {
                     .frame(maxWidth: .infinity)
                     .padding(Metrics.buttonPadding)
                     .foregroundColor(viewStore.able ? .cheffiWhite : .cheffiGray5)
-                    .background(viewStore.able ? .mainCTA : .cheffiGray1)
+                    .background(viewStore.able ? Color.mainCTA : .cheffiGray1)
                     .cornerRadius(Metrics.buttonCornerRadius)
             }
             .disabled(!viewStore.able)

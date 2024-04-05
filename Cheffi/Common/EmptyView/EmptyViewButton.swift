@@ -27,7 +27,7 @@ struct EmptyViewButton: View {
         )
         .padding(Metrics.padding)
         .foregroundColor(.main)
-        .background(.bg)
+        .background(Color.bg)
         .cornerRadius(Metrics.cornerRadius)
     }
 }
