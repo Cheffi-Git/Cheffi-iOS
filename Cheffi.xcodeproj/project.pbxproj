@@ -29,6 +29,7 @@
 		6B40B2FD2B66454200945946 /* TextFieldBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40B2FC2B66454200945946 /* TextFieldBarReducer.swift */; };
 		6B40B3002B66642900945946 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40B2FF2B66642900945946 /* DropDownPickerView.swift */; };
 		6B40B3022B66654D00945946 /* DropDownPickerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B40B3012B66654D00945946 /* DropDownPickerReducer.swift */; };
+		6B4C40482BC01A4900E20375 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4C40472BC01A4900E20375 /* MyPageView.swift */; };
 		6B7174372B42DD82009FEF35 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7174362B42DD82009FEF35 /* NavigationBarView.swift */; };
 		6B795CFE2B8B16500000FB43 /* RestaurantMenuComposePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B795CFD2B8B16500000FB43 /* RestaurantMenuComposePopupView.swift */; };
 		6B795D002B8B1E2F0000FB43 /* RestaurantMenuComposePopupReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B795CFF2B8B1E2F0000FB43 /* RestaurantMenuComposePopupReducer.swift */; };
@@ -375,6 +376,7 @@
 		6B40B2FC2B66454200945946 /* TextFieldBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBarReducer.swift; sourceTree = "<group>"; };
 		6B40B2FF2B66642900945946 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
 		6B40B3012B66654D00945946 /* DropDownPickerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerReducer.swift; sourceTree = "<group>"; };
+		6B4C40472BC01A4900E20375 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		6B7174362B42DD82009FEF35 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		6B795CFD2B8B16500000FB43 /* RestaurantMenuComposePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMenuComposePopupView.swift; sourceTree = "<group>"; };
 		6B795CFF2B8B1E2F0000FB43 /* RestaurantMenuComposePopupReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMenuComposePopupReducer.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 				CE0D45372A61AA5A00636989 /* MyPageViewController.swift */,
 				CE0D45392A61AA7700636989 /* MyPage.storyboard */,
 				6B04977C2BC0192B00092A58 /* MyPageReducer.swift */,
+				6B4C40472BC01A4900E20375 /* MyPageView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -2184,6 +2187,7 @@
 				D4512EE42B70F5B900D7F65E /* ReviewsByAreaRequest.swift in Sources */,
 				D47C68A32B307F2F007F7650 /* SearchViewHeader.swift in Sources */,
 				D43C4FC02B8207B600047B7F /* NotificationRequest.swift in Sources */,
+				6B4C40482BC01A4900E20375 /* MyPageView.swift in Sources */,
 				FF3E0D572ACB1158009B236D /* ProfileTagCell.swift in Sources */,
 				FF3E0D522ACB0DA4009B236D /* ProfileTagListView.swift in Sources */,
 				CE42BA622A6B9D8F00EBB80A /* UIColor+Extensions.swift in Sources */,
