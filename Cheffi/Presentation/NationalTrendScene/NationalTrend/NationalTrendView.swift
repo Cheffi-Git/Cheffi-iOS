@@ -51,7 +51,18 @@ struct NationalTrendView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(EdgeInsets(top: 10, leading: 16, bottom: 16, trailing: 16))
-                    .background(.cheffiBlack)
+                    .background(content: {
+                        ZStack {
+                            Color.black
+                            
+                            VStack {
+                                Spacer()
+                                
+                                Image("Coming_Soon")
+                            }
+                            .padding(.bottom, 16)
+                        }
+                    })
                     .cornerRadius(16.0)
                 }
                 .padding(.horizontal, 16.0)

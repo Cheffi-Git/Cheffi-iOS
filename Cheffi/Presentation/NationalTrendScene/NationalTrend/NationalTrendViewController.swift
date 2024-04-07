@@ -30,5 +30,8 @@ final class NationalTrendViewController: UIViewController {
                 }
             )
         )
+        
+        // 커밍순 팝업이 overFullScreen 프레젠테이션 스타일로 표시 되어 presentingViewController 의 뷰가 배경에 비쳐보일 수 있도록 hosting 뷰컨트롤러의 뷰 배경색을 clear로 지정.
+        children.first?.view.backgroundColor = .clear
     }
 }
