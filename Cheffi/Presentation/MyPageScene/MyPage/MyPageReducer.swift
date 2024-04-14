@@ -24,6 +24,17 @@ struct MyPageReducer: Reducer {
             leftButtonKind: .back,
             rightButtonKind: .setting
         )
+        
+        var allTags: [Tag] = [
+            // TODO: API 응답으로
+            Tag(id: 0, type: .food, name: "매콤한"),
+            Tag(id: 1, type: .food, name: "노포"),
+            Tag(id: 2, type: .food, name: "웨이팅 짧은"),
+            Tag(id: 3, type: .food, name: "아시아음식"),
+            Tag(id: 4, type: .food, name: "한식"),
+            Tag(id: 5, type: .food, name: "비건"),
+            Tag(id: 6, type: .food, name: "분위기 있는 곳")
+        ]
     }
     
     enum Action {
