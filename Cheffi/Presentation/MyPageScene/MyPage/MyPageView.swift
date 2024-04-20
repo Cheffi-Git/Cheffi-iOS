@@ -13,6 +13,7 @@ import ViewStore
 @ViewStore(MyPageReducer.self)
 struct MyPageView: View {
     @State private var currentTabIndex: Int = 0
+    @State private var readedReviewThumbnailListHeight: CGFloat = 0
     
     var body: some View {
         VStack(spacing: 0) {
@@ -42,7 +43,6 @@ struct MyPageView: View {
                                         .font(.custom("SUIT", size: 12))
                                         .foregroundColor(.cheffiGray8)
                                 }
-                                .frame(width: .infinity)
                                 
                                 Rectangle()
                                     .frame(width: 1.0, height: 20.0)
@@ -59,7 +59,6 @@ struct MyPageView: View {
                                         .font(.custom("SUIT", size: 12))
                                         .foregroundColor(.cheffiGray8)
                                 }
-                                .frame(width: .infinity)
                                 
                                 Rectangle()
                                     .frame(width: 1.0, height: 20.0)
@@ -76,7 +75,6 @@ struct MyPageView: View {
                                         .font(.custom("SUIT", size: 12))
                                         .foregroundColor(.cheffiGray8)
                                 }
-                                .frame(width: .infinity)
                             }
                             
                             Button {
@@ -95,7 +93,7 @@ struct MyPageView: View {
                                             )
                                     )
                             }
-                            .frame(width: .infinity, height: 32.0)
+                            .frame(height: 32.0)
                         }
                     }
                     .padding(.bottom, 20.0)
@@ -152,13 +150,9 @@ struct MyPageView: View {
                 .padding(.horizontal, 16.0)
                 
                 VStack(spacing: 0) {
-                    ZStack {
-                        VStack {
-                            Spacer()
-                            
-                            Color.cheffiWhite05
-                                .frame(height: 2.0)
-                        }
+                    ZStack(alignment: .bottom) {
+                        Color.cheffiWhite05
+                            .frame(height: 2.0)
                         
                         MenuTabBarView(
                             currentTabIndex: $currentTabIndex,
@@ -170,16 +164,51 @@ struct MyPageView: View {
                         )
                         .padding(.horizontal, 16.0)
                     }
+                    .padding(.bottom, 16.0)
                     
-                    TabView(selection: self.$currentTabIndex) {
-                        Color.yellow
-                        Color.green
-                        Color.blue
+                    ZStack {
+                        Color.clear
+                            .frame(width: 1)
+                            .readSize { size in
+                                readedReviewThumbnailListHeight = size.height
+                            }
+                        
+                        TabView(selection: $currentTabIndex) {
+                            ReviewThumbnailListView(store.scope(
+                                state: \.myReviewThumbnailListState,
+                                action: { .myReviewThumbnailListAction($0) }
+                            ))
+                            .readSize { size in
+                                readedReviewThumbnailListHeight = size.height
+                            }
+                            .tag(0)
+                            
+                            ReviewThumbnailListView(store.scope(
+                                state: \.purchasedReviewThumbnailListState,
+                                action: { .purchasedReviewThumbnailListAction($0) }
+                            ))
+                            .readSize { size in
+                                readedReviewThumbnailListHeight = size.height
+                            }
+                            .tag(1)
+                            
+                            ReviewThumbnailListView(store.scope(
+                                state: \.bookmarkedReviewThumbnailListState,
+                                action: { .bookmarkedReviewThumbnailListAction($0) }
+                            ))
+                            .readSize { size in
+                                readedReviewThumbnailListHeight = size.height
+                            }
+                            .tag(2)
+                        }
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .frame(height: readedReviewThumbnailListHeight)
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .never))
-                    .frame(maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
                 }
             }
+        }
+        .onAppear {
+            viewStore.send(.onAppear)
         }
     }
 }

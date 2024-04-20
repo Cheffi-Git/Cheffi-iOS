@@ -21,7 +21,6 @@ struct MenuTabBarView: View {
                     name: name,
                     tabIndex: index
                 )
-                    .frame(maxWidth: .infinity)
             }
         }
         .frame(height: 40.0)
