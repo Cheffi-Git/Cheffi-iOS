@@ -12,6 +12,8 @@ import ViewStore
 
 @ViewStore(MyPageReducer.self)
 struct MyPageView: View {
+    @State private var currentTabIndex: Int = 0
+    
     var body: some View {
         VStack(spacing: 0) {
             NavigationBarView(store.scope(
@@ -145,9 +147,39 @@ struct MyPageView: View {
                                     .stroke(.cheffiGray1, lineWidth: 1)
                             )
                     }
+                    .padding(.bottom, 16.0)
+                }
+                .padding(.horizontal, 16.0)
+                
+                VStack(spacing: 0) {
+                    ZStack {
+                        VStack {
+                            Spacer()
+                            
+                            Color.cheffiWhite05
+                                .frame(height: 2.0)
+                        }
+                        
+                        MenuTabBarView(
+                            currentTabIndex: $currentTabIndex,
+                            tabBarItemNames: [
+                                "내 리뷰",
+                                "구매한 리뷰",
+                                "찜한 리뷰"
+                            ]
+                        )
+                        .padding(.horizontal, 16.0)
+                    }
+                    
+                    TabView(selection: self.$currentTabIndex) {
+                        Color.yellow
+                        Color.green
+                        Color.blue
+                    }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(maxWidth: .infinity, minHeight: 300, maxHeight: .infinity)
                 }
             }
-            .padding(.horizontal, 16.0)
         }
     }
 }
