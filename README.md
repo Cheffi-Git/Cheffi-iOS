@@ -8,12 +8,9 @@
 
 ## 스크린샷
 
-> TODO: 스크린샷 추가 예정
-> - 맛집 검색 화면 (근처 맛집 리스트)
-> - 맛집 검색 화면 (검색 결과)
-> - 신규 맛집 등록 화면
-> - 리뷰 작성 화면
-> - 마이페이지
+|                  홈                   |            맛집 검색 (근처 맛집)             |            맛집 검색 (검색 결과)             | 신규 맛집 등록                             |                          리뷰 작성                          |               해시태그 선택                |                          마이페이지                          |
+| :----------------------------------: | :----------------------------------: | :----------------------------------: | ------------------------------------ | :----------------------------------: | :----------------------------------: | :----------------------------------: |
+| <img width="400" alt="스크린샷 2025-12-04 오후 11 48 29" src="https://github.com/user-attachments/assets/ee72b505-3621-4279-be81-f5860c736c0d" /> | <img width="400" alt="스크린샷 2025-12-04 오후 11 50 24" src="https://github.com/user-attachments/assets/8fee468e-4d68-4146-ac41-b2de38fa79b0" /> | <img width="400" alt="스크린샷 2025-12-04 오후 11 48 50" src="https://github.com/user-attachments/assets/afb07953-32d3-4f26-9578-b90c10560888" /> | <img width="400" alt="스크린샷 2025-12-04 오후 11 52 02" src="https://github.com/user-attachments/assets/18074467-bb4f-4111-8636-5d7a451e90c2" /> | ![review_compose](https://github.com/user-attachments/assets/58aca886-aeee-4ecc-ada2-b1a28f445010) | <img width="400" alt="스크린샷 2025-12-05 오전 12 07 52" src="https://github.com/user-attachments/assets/38f27f79-87fd-47e6-9e7f-9407af90e1a9" /> | ![mypage](https://github.com/user-attachments/assets/de1e8986-0e64-4b0b-b324-a6bbfa899cfb) |
 
 ---
 
